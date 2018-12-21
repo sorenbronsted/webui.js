@@ -1,0 +1,34 @@
+{
+  "name": "ufds/webui",
+  "description": "WebUi Example App",
+  "license": "Private",
+  "config": {
+    "platform": {
+      "php": "5.5"
+    },
+    "secure-http": false
+  },
+
+  "autoload": {
+    "psr-4": { "ufds\\": ["application/model"] }
+  },
+
+  "require": {
+    "ruckusing/ruckusing-migrations" : "dev-master",
+    "ufds/libdatabase": "dev-master",
+    "ufds/libtypes": "dev-master",
+    "ufds/libcommon": "dev-master",
+    "ufds/librest": "dev-master",
+    "ufds/libutil": "dev-master",
+    "facebook/webdriver": "1.4.1"
+  },
+  
+  "repositories": [
+    {"type": "vcs", "url": "http://dev/git/ufds/ruckusing-migrations.git"},
+    {"type": "vcs", "url": "http://dev/git/ufds/libdatabase.git"},
+    {"type": "vcs", "url": "http://dev/git/ufds/libutil.git"},
+    {"type": "vcs", "url": "http://dev/git/ufds/libtypes.git"},
+    {"type": "vcs", "url": "http://dev/git/ufds/librest.git"},
+    {"type": "vcs", "url": "http://dev/git/ufds/libcommon.git"}
+  ]
+}

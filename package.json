@@ -1,0 +1,33 @@
+{
+  "name": "webui",
+  "version": "1.0.0",
+  "description": "webui",
+  "private": true,
+  "directories": {
+    "doc": "doc",
+    "test": "test/js",
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "mocha test/js",
+    "coverage": "nyc --reporter=html --report-dir=doc/coverage mocha test/js",
+    "bundle": "webpack-cli"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^3.1.3",
+    "http-server": "^0.11.1",
+    "jsdom": "^12.2.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "collect.js": "^4.2.1",
+    "moment": "^2.22.2",
+    "numeral": "^2.0.6",
+    "uri-js": "^4.2.2"
+  }
+}
