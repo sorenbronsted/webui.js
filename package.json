@@ -1,8 +1,15 @@
 {
-  "name": "webui",
+  "name": "webuii.js",
   "version": "1.0.0",
   "description": "webui",
   "private": true,
+  "repository": {
+  	"type" : "git",
+  	"url" : "http://dev.ufds.org/git/ufds/webui.js.git"
+  },
+  "files": [
+    "lib/"
+  ],
   "directories": {
     "doc": "doc",
     "test": "test/js",
@@ -13,7 +20,10 @@
     "coverage": "nyc --reporter=html --report-dir=doc/coverage mocha test/js",
     "bundle": "webpack-cli"
   },
-  "author": "",
+  "author": {
+	"name": "Søren Brønsted",
+	"email": "sb@ufds.dk",
+  },
   "license": "ISC",
   "devDependencies": {
     "cypress": "^3.1.3",
