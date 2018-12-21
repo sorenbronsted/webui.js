@@ -22,7 +22,7 @@
   },
   "author": {
 	"name": "Søren Brønsted",
-	"email": "sb@ufds.dk",
+	"email": "sb@ufds.dk"
   },
   "license": "ISC",
   "devDependencies": {
