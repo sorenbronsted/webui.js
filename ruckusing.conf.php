@@ -1,5 +1,5 @@
 <?php
-require_once 'web/settings.php';
+require_once 'public/settings.php';
 
 //----------------------------
 // DATABASE CONFIGURATION

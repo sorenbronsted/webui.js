@@ -3,5 +3,7 @@
 node_modules/
 old/
 vendor/
-webpack.config.js
+old_webpack.config.js
+.eslintrc.json
+public/.htaccess
 

@@ -1,43 +1,42 @@
 {
   "name": "webui.js",
   "version": "1.0.0",
-  "description": "webui",
+  "author": "Søren Brønsted <sb@ufds.dk>",
+  "license": "ISC",
+  "description": "webui.js",
   "private": true,
   "repository": {
-  	"type" : "git",
-  	"url" : "http://dev.ufds.org/git/ufds/webui.js.git"
+    "type": "git",
+    "url": "http://dev.ufds.org/git/ufds/webui.js.git"
   },
   "files": [
     "lib/"
   ],
   "directories": {
     "doc": "doc",
-    "test": "test/js",
-    "lib": "lib"
+    "lib": "lib",
+    "test": "test"
   },
   "scripts": {
     "test": "mocha test/js",
     "coverage": "nyc --reporter=html --report-dir=doc/coverage mocha test/js",
-    "bundle": "webpack-cli"
-  },
-  "author": {
-	"name": "Søren Brønsted",
-	"email": "sb@ufds.dk"
-  },
-  "license": "ISC",
-  "devDependencies": {
-    "cypress": "^3.1.3",
-    "http-server": "^0.11.1",
-    "jsdom": "^12.2.0",
-    "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
-    "webpack": "^4.27.1",
-    "webpack-cli": "^3.1.2"
+    "bundle": "webpack-cli --mode=development"
   },
   "dependencies": {
     "collect.js": "^4.2.1",
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
     "uri-js": "^4.2.2"
-  }
+  },
+  "devDependencies": {
+    "cypress": "^3.1.4",
+    "http-server": "^0.11.1",
+    "jsdom": "^12.2.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2"
+  },
+  "main": "index.js",
+  "keywords": []
 }

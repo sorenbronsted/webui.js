@@ -1,3 +1,4 @@
+'use strict';
 
 const collect = require('collect.js');
 const mvc = require('../../lib/src/mvc');
@@ -7,10 +8,10 @@ const app = require('./Person.js');
 // This called from the service worker
 async function main() {
 
-	let rest = new mvc.Rest(new XMLHttpRequest());
-	let store = new mvc.RestStore(rest);
-	let css = new ui.CssDelegate(new ui.InputCssW3(), new ui.AnchorCss(), new ui.TableCssW3(window.document));
-	let router = new mvc.Router(window);
+	var rest = new mvc.Rest(new XMLHttpRequest());
+	var store = new mvc.RestStore(rest);
+	var css = new ui.CssDelegate(new ui.InputCssUfds(), new ui.AnchorCss(), new ui.TableCssUfds(window.document));
+	var router = new mvc.Router(window);
 	
 	// Add elements to repo
 	let repo = new mvc.Repo();

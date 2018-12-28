@@ -13,7 +13,7 @@ abstract class ModelObject extends DbObject implements RestEnable, JsonEnable {
     $properties = $this->getProperties();
     foreach ($mandatories as $mandatory) {
       if (Property::isEmpty($properties[$mandatory], $this->$mandatory)) {
-        $errors[$mandatory] = "Felt skal udfyldelse";
+        $errors[$mandatory] = "Felt skal udfyldes";
       }
     }
     if (count($errors) > 0) {

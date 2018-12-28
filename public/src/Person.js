@@ -1,4 +1,3 @@
-
 const mvc = require('../../lib/src/mvc');
 
 class PersonListCtrl extends mvc.Controller {
