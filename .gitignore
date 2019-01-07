@@ -3,6 +3,7 @@
 node_modules/
 old/
 vendor/
+/doc/coverage
 old_webpack.config.js
 .eslintrc.json
 public/.htaccess
