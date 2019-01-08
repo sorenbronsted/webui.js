@@ -4,7 +4,6 @@ const mvc = require('../../lib/src/mvc');
 const ui = require('../../lib/src/ui');
 const app = require('./Person.js');
 
-// This called from the service worker
 async function main() {
 
 	let rest = new mvc.Rest(new XMLHttpRequest());
