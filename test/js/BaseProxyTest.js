@@ -4,7 +4,20 @@ const TestStore = require('./utils/TestStore.js').TestStore;
 const TestObserver = require('./utils/TestObserver.js').TestObserver;
 const assert = require('assert');
 
-class MyClass extends mvc.BaseProxy {}
+class MyClass extends mvc.BaseProxy {
+	constructor() {
+		super();
+		this._someProperty = '';
+	}
+
+	get someProperty() {
+		return this._someProperty;
+	}
+
+	set someProperty(value) {
+		this._someProperty = value;
+	}
+}
 
 describe('BaseProxy', function() {
 	describe('#add', function() {
@@ -27,6 +40,14 @@ describe('BaseProxy', function() {
 			assert.notEqual(o, undefined);
 			assert.equal(o.uid, 1);
 			assert.equal(o.name, 'load');
+		});
+
+		it('Should fail on different class', function() {
+			assert.throws(() => { proxy.add({}) },/same class/);
+		});
+
+		it('Should fail on missing uid', function() {
+			assert.throws(() => { proxy.add({MyClass:{}}) },/must have .* uid/);
 		});
 	});
 
@@ -81,8 +102,15 @@ describe('BaseProxy', function() {
 			proxy.add(serverResult);
 			proxy.setProperty(new mvc.ElementValue(MyClass.name, 'name', 1, 'test2'));
 			let o = proxy.get(1);
-			assert.notEqual(o, undefined);
+			assert.notEqual(undefined, o);
 			assert.equal('test2', o.name);
+		});
+
+		it('Should set ownproperty', function() {
+			assert.equal('', proxy.someProperty);
+			proxy.setProperty(new mvc.ElementValue(MyClass.name,'someProperty', 1, 'someValue'));
+			assert.equal('someValue', proxy.someProperty);
+			assert.equal(undefined, proxy.get(1));
 		});
 	});
 });
