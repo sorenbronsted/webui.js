@@ -15,6 +15,9 @@ class TestStore {
 			return new SimulatedPromise([]);
 		}
 
+		if (parameters === undefined) {
+			parameters = collect({});
+		}
 		this.objects.get(cls).values().each(value => {
 			let match = 0;
 			parameters.each(p => {

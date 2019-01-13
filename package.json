@@ -1,9 +1,7 @@
 {
   "name": "webui.js",
   "version": "1.0.0",
-  "author": "Søren Brønsted <sb@ufds.dk>",
-  "license": "ISC",
-  "description": "webui.js",
+  "description": "webui",
   "private": true,
   "repository": {
     "type": "git",
@@ -14,30 +12,32 @@
   ],
   "directories": {
     "doc": "doc",
-    "lib": "lib",
-    "test": "test"
+    "test": "test/js",
+    "lib": "lib"
   },
   "scripts": {
     "test": "mocha test/js",
     "coverage": "nyc --reporter=html --report-dir=doc/coverage mocha test/js",
-    "bundle": "webpack-cli --mode=development"
+    "bundle": "webpack-cli"
   },
-  "dependencies": {
-    "collect.js": "^4.2.1",
-    "moment": "^2.22.2",
-    "npm": "^6.5.0",
-    "numeral": "^2.0.6",
-    "uri-js": "^4.2.2"
+  "author": {
+    "name": "Søren Brønsted",
+    "email": "sb@ufds.dk"
   },
+  "license": "ISC",
   "devDependencies": {
     "cypress": "^3.1.4",
     "http-server": "^0.11.1",
     "jsdom": "^12.2.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
-    "webpack": "^4.28.2",
-    "webpack-cli": "^3.1.2"
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.2.1"
   },
-  "main": "index.js",
-  "keywords": []
+  "dependencies": {
+    "collect.js": "^4.3.0",
+    "moment": "^2.23.0",
+    "numeral": "^2.0.6",
+    "uri-js": "^4.2.2"
+  }
 }
