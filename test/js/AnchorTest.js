@@ -39,9 +39,9 @@ describe('Anchor', function() {
 		elem.click();
 		assert.equal(view.eventName, view.eventClick);
 		assert.equal(view.isValidRequired, true);
-		assert.equal(view.body.cls, mvc.BaseProxy.name);
-		assert.equal(view.body.property, 'name');
-		assert.equal(view.body.uid, '1');
-		assert.equal(view.body.value, `${browser.location}load`);
+		assert.equal(view.body.elementValue.cls, mvc.BaseProxy.name);
+		assert.equal(view.body.elementValue.property, 'name');
+		assert.equal(view.body.elementValue.uid, '1');
+		assert.equal(view.body.elementValue.value, `${browser.location}load`);
 	});
 });
