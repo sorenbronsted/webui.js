@@ -5,8 +5,7 @@ old/
 vendor/
 **/*.bundle.js
 webpack.config.js
-/doc/coverage
+doc/coverage
 old_webpack.config.js
 .eslintrc.json
 public/.htaccess
-
