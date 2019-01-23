@@ -26,11 +26,6 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "@babel/preset-env": "^7.2.3",
-    "babel": "^6.23.0",
-    "babel-register": "^6.26.0",
-    "cypress": "^3.1.4",
-    "http-server": "^0.11.1",
     "jsdom": "^12.2.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
@@ -38,9 +33,7 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "ajv": "^6.7.0",
     "collect.js": "^4.3.0",
-    "flatpickr": "^4.5.2",
     "moment": "^2.23.0",
     "numeral": "^2.0.6",
     "uri-js": "^4.2.2"
