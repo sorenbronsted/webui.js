@@ -16,7 +16,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "mocha --require babel-register  test/js",
+    "test": "mocha test/js",
     "coverage": "nyc --reporter=html --report-dir=doc/coverage mocha test/js",
     "bundle": "webpack-cli"
   },
