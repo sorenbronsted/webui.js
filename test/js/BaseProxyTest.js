@@ -108,7 +108,7 @@ describe('BaseProxy', function() {
 
 		it('Should set ownproperty', function() {
 			assert.equal('', proxy.someProperty);
-			proxy.setProperty(new mvc.ElementValue(MyClass.name,'someProperty', 1, 'someValue'));
+			proxy.setProperty(new mvc.ElementValue(MyClass.name,'someProperty', undefined, 'someValue'));
 			assert.equal('someValue', proxy.someProperty);
 			assert.equal(undefined, proxy.get(1));
 		});
