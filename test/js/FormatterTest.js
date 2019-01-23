@@ -72,7 +72,7 @@ describe('Formatter tests', function() {
 	});
 
 	it("Should be empty", function() {
-		assert.equal('', formatter.display(undefined, undefined));
+		assert.equal(undefined, formatter.display(undefined, undefined));
 		assert.equal('', formatter.display(undefined, null));
 		assert.equal('', formatter.display(undefined, 'null'));
 		assert.notEqual('', formatter.display('string', 'x'));
