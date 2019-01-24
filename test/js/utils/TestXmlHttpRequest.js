@@ -1,29 +1,24 @@
 
 const collect = require('collect.js');
 
+let _responseText;
+let _status;
+let _responseHeader;
+let _header;
+let _networkError;
+let _parameters;
+
 class TestXmlHttpRequest {
+	constructor() {
+		this._readyState = 4;
+	}
+
 	get readyState() {
 		return this._readyState;
 	}
 
 	set readyState(value) {
 		this._readyState = value;
-	}
-	constructor() {
-		this._status = null;
-		this._responseText = null;
-		this._responseHeader = {};
-		this._readyState = 4;
-		this.header = collect({});
-		this.networkError = false;
-	}
-
-	getResponseHeader(name) {
-		return this._responseHeader[name];
-	}
-
-	setResponseHeader(name, value) {
-		this._responseHeader[name] = value;
 	}
 
 	set onload(fn) {
@@ -34,20 +29,51 @@ class TestXmlHttpRequest {
 		this._onerror = fn;
 	}
 
-	get status() {
-		return this._status;
+	getResponseHeader(name) {
+		return _responseHeader[name];
 	}
 
-	set status(status) {
-		this._status = status;
+	static setResponseHeader(name, value) {
+		if (_responseHeader === undefined) {
+			_responseHeader = {};
+		}
+		_responseHeader[name] = value;
+	}
+
+	static set networkError(value) {
+		_networkError = value;
+	}
+
+	static get header() {
+		return _header;
+	}
+
+	static set header(value) {
+		_header = value;
+	}
+
+	get status() {
+		return _status;
+	}
+
+	static get status() {
+		return _status;
+	}
+
+	static set status(status) {
+		_status = status;
 	}
 
 	get responseText() {
-		return this._responseText;
+		return _responseText;
 	}
 
-	set responseText(responseText) {
-		this._responseText = responseText;
+	static get responseText() {
+		return _responseText;
+	}
+
+	static set responseText(responseText) {
+		_responseText = responseText;
 	}
 
 	open(method, url) {
@@ -56,12 +82,16 @@ class TestXmlHttpRequest {
 	}
 
 	setRequestHeader(name, value) {
-		this.header[name] = value;
+		_header[name] = value;
+	}
+
+	static get parameters() {
+		return _parameters;
 	}
 
 	send(parameters) {
-		this.parameters = parameters;
-		if (this.networkError) {
+		_parameters = parameters;
+		if (_networkError) {
 			this._onerror()
 		}
 		else {
