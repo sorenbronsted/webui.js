@@ -94,7 +94,7 @@ describe('Input', function() {
 		assert.equal(view.isDirty, true);
 	});
 
-	it('Should be dirty on text change', function() {
+	it('Should be dirty on file change', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=file]");
 		assert.equal(view.isDirty, false);
