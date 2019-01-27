@@ -110,7 +110,7 @@ describe('Rest', function() {
 		TestXmlHttpRequest.setResponseHeader('content-type','text');
 
 		let file = {'name': 'test', 'type':'application/text', 'blob':'test'};
-		let sample = await rest.postFile('http://somehost/text', file);
+		let sample = await rest.postFiles('http://somehost/text', file);
 		assert.notEqual(sample, null);
 		assert.equal(sample, TestXmlHttpRequest.responseText);
 		assert.equal(TestXmlHttpRequest.parameters, file);
