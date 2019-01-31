@@ -34,7 +34,7 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "collect.js": "^4.3.0",
+    "collect.js": "^4.6.1",
     "moment": "^2.23.0",
     "numeral": "^2.0.6",
     "tiny-date-picker": "^3.2.8",
