@@ -8,7 +8,7 @@ class TestStore {
 		this.objects = new collect({});
 	}
 
-	read(cls, parameters) {
+	read(cls, parameters, method) {
 		let result = collect([]);
 
 		if (!this.objects.has(cls)) {
@@ -43,7 +43,7 @@ class TestStore {
 		return new SimulatedPromise();
 	}
 
-	update(cls, data) {
+	update(cls, data, method) {
 		if (!this.objects.has(cls)) {
 			this.objects.put(cls, collect({}));
 		}
