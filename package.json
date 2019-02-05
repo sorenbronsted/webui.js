@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "mocha -r jsdom-global/register test/js",
-    "coverage": "nyc --reporter=html --report-dir=doc/coverage mocha test/js",
+    "coverage": "SPAWN_WRAP_SHIM_ROOT=. nyc --reporter=html --report-dir=doc/coverage mocha -r jsdom-global/register test/js",
     "bundle": "webpack-cli"
   },
   "author": {
