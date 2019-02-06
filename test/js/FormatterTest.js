@@ -64,10 +64,21 @@ describe('Formatter tests', function() {
 		let source = '2015-10-23';
 		let result = '23-10-2015';
 
-		let test = formatter.display('datetime', source, 'DD-MM-YYYY');
+		let test = formatter.display('date', source, 'DD-MM-YYYY');
 		assert.equal(test, result);
 
-		test = formatter.internal('datetime', result, 'DD-MM-YYYY');
+		test = formatter.internal('date', result, 'DD-MM-YYYY');
+		assert.equal(test, source);
+	});
+
+	it("Should convert to a datetime", function() {
+		let source = '2015-10-23 11:12';
+		let result = '23-10-2015 11:12';
+
+		let test = formatter.display('datetime', source, 'DD-MM-YYYY HH:mm');
+		assert.equal(test, result);
+
+		test = formatter.internal('datetime', result, 'DD-MM-YYYY HH:mm');
 		assert.equal(test, source);
 	});
 
