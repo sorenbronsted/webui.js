@@ -7,6 +7,8 @@ let _responseHeader;
 let _header;
 let _networkError;
 let _parameters;
+let _url;
+let _method;
 
 class TestXmlHttpRequest {
 	constructor() {
@@ -76,9 +78,17 @@ class TestXmlHttpRequest {
 		_responseText = responseText;
 	}
 
+	static get url() {
+		return _url;
+	}
+
+	static get method() {
+		return _method;
+	}
+
 	open(method, url) {
-		this.method = method;
-		this.url = url;
+		_method = method;
+		_url = url;
 	}
 
 	setRequestHeader(name, value) {
