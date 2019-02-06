@@ -16,8 +16,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "mocha test/js",
-    "coverage": "nyc --reporter=html --report-dir=doc/coverage mocha test/js",
+    "test": "mocha -r jsdom-global/register test/js",
+    "coverage": "SPAWN_WRAP_SHIM_ROOT=. nyc --reporter=html --report-dir=doc/coverage mocha -r jsdom-global/register test/js",
     "bundle": "webpack-cli"
   },
   "author": {
@@ -26,7 +26,8 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "jsdom": "^12.2.0",
+    "jsdom": "12.2.0",
+    "jsdom-global": "3.0.2",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
     "webpack": "^4.28.1",
@@ -36,6 +37,7 @@
     "collect.js": "^4.6.1",
     "moment": "^2.23.0",
     "numeral": "^2.0.6",
+    "tiny-date-picker": "^3.2.8",
     "uri-js": "^4.2.2"
   }
 }

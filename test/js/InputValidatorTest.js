@@ -72,9 +72,11 @@ describe('InputValidator tests', function() {
 		try {
 			let date = new Date().setDate(1);
 			assert.equal(validator.date('1','YYYY-MM-DD'), moment(date).format('YYYY-MM-DD'));
-			date = new Date().setMonth(2,1);
+			// note, months a zero indexed in js, hence month 1 = february
+			date = new Date().setMonth(1,1);
 			assert.equal(validator.date('012','YYYY-MM-DD'), moment(date).format('YYYY-MM-DD'));
-			date = new Date(2018,2,1);
+			// note, months a zero indexed in js, hence month 1 = february
+			date = new Date(2018,1,1);
 			assert.equal(validator.date('010218','YYYY-MM-DD'), moment(date).format('YYYY-MM-DD'));
 		}
 		catch(e) {
@@ -124,7 +126,8 @@ describe('InputValidator tests', function() {
 	it('Should pass datetime validation', function() {
 		try {
 			let date = new Date();
-			date.setFullYear(2018,12,5);
+			// note, months a zero indexed in js, hence month 11 = december
+			date.setFullYear(2018,11,5);
 			date.setHours(13,0,0);
 			assert.equal(validator.datetime('051218 13','YYYY-MM-DD HH:mm:ss'), moment(date).format('YYYY-MM-DD HH:mm:ss'));
 		}

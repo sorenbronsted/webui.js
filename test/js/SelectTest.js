@@ -49,7 +49,7 @@ describe('Select', function() {
 		assert.equal(view.isDirty, false);
 		assert.equal(view.isValid, true);
 
-		assert.equal(select.length, 2);
+		assert.equal(select.length, 3);
 		assert.equal(select.value, '1');
 	});
 

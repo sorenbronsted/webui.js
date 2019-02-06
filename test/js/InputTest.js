@@ -127,6 +127,7 @@ describe('Input', function() {
 	it('Should fire event on blur', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");
+		elem.value = 'test';
 		elem.focus();
 		elem.blur();
 		assert.equal(view.eventName, view.eventPropertyChanged);
