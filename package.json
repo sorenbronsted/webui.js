@@ -37,6 +37,8 @@
     "collect.js": "^4.6.1",
     "moment": "^2.23.0",
     "numeral": "^2.0.6",
+    "puppeteer": "^1.17.0",
+    "puppeteer-to-istanbul": "^1.2.2",
     "tiny-date-picker": "^3.2.8",
     "uri-js": "^4.2.2"
   }

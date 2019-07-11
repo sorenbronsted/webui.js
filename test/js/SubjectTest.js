@@ -1,18 +1,14 @@
 
 const mvc = require('../../lib/src/mvc');
 const assert = require('assert');
+const TestObserver = require('./utils/TestObserver.js').TestObserver;
 
 describe('Subject', function() {
-	let called;
 	let observer;
 	let subject;
 
 	beforeEach(function() {
-		called = 0;
-		observer = new mvc.Observer();
-		observer.addEventHandler('test', function() {
-			called++;
-		});
+		observer = new TestObserver();
 		subject = new mvc.Subject();
 	});
 
@@ -20,29 +16,29 @@ describe('Subject', function() {
 	it('should return 1 when handled', function() {
 		subject.addEventListener(observer);
 		subject.addEventListener(observer);
-		subject.fire('test');
-		assert.equal(called, 1);
+		subject.fire(new mvc.Event());
+		assert.notStrictEqual(observer.root, null);
 	});
 
 	it('Should cope with removal twice', function() {
 		subject.addEventListener(observer);
 		subject.removeEventListener(observer);
 		subject.removeEventListener(observer);
-		subject.fire('test');
-		assert.equal(called, 0);
+		subject.fire(new mvc.Event());
+		assert.strictEqual(observer.root, null);
 	});
 
 	it('Should be called', function() {
 		subject.addEventListener(observer);
-		subject.fire('test');
-		assert.equal(called, 1);
+		subject.fire(new mvc.Event());
+		assert.notStrictEqual(observer.root, null);
 	});
 
 	it('Should not be called', function() {
 		subject.addEventListener(observer);
 		subject.removeEventListener(observer);
-		subject.fire('test');
-		assert.equal(called, 0);
+		subject.fire(new mvc.Event());
+		assert.strictEqual(observer.root, null);
 	});
 });
 

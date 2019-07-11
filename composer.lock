@@ -1,17 +1,17 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c81b59169449ab791d4d3f4234dc4d44",
+    "content-hash": "c1f8cb51ad02189a286300cf866dba15",
     "packages": [
         {
             "name": "ruckusing/ruckusing-migrations",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://dev/git/ufds/ruckusing-migrations.git",
+                "url": "http://dev.ufds.org/git/ufds/ruckusing-migrations.git",
                 "reference": "21237303212f779b7f476d586448c6ce8560889f"
             },
             "require": {
@@ -64,7 +64,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://dev/git/ufds/libcommon.git",
+                "url": "http://dev.ufds.org/git/ufds/libcommon.git",
                 "reference": "068e9ff449fe6a2ee8283b54aa4cd7a00b23e180"
             },
             "type": "library",
@@ -86,8 +86,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://dev/git/ufds/libdatabase.git",
-                "reference": "6c40e7d596a461b2f8d27c67b2cc04da3e7ab467"
+                "url": "http://dev.ufds.org/git/ufds/libdatabase.git",
+                "reference": "61bde5759280a5325013ca15bf86b12bfd84c40e"
             },
             "require": {
                 "ruckusing/ruckusing-migrations": "dev-master",
@@ -105,14 +105,14 @@
                 "UFDS privat"
             ],
             "description": "Generel ORM mapper baseret på PDO",
-            "time": "2018-09-04T13:52:06+00:00"
+            "time": "2019-07-11T07:36:40+00:00"
         },
         {
             "name": "ufds/librest",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://dev/git/ufds/librest.git",
+                "url": "http://dev.ufds.org/git/ufds/librest.git",
                 "reference": "c8c153bdbeb005d0d86a0b2b3036c814424031f8"
             },
             "require": {
@@ -143,8 +143,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://dev/git/ufds/libtypes.git",
-                "reference": "ba93a1d262f58a6d201d07525282fec34fa0d156"
+                "url": "http://dev.ufds.org/git/ufds/libtypes.git",
+                "reference": "e854043fd0ad8e88b814a17ab38122fd23cf524a"
             },
             "require": {
                 "ufds/libcommon": "dev-master"
@@ -161,14 +161,14 @@
                 "UFDS privat"
             ],
             "description": "UFDS standard types",
-            "time": "2018-09-12T11:27:16+00:00"
+            "time": "2019-02-19T09:12:57+00:00"
         },
         {
             "name": "ufds/libutil",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "http://dev/git/ufds/libutil.git",
+                "url": "http://dev.ufds.org/git/ufds/libutil.git",
                 "reference": "f2de70dd48f6a3ffa28d82f5757c612ac64eaeb0"
             },
             "require": {
@@ -208,6 +208,6 @@
     "platform": [],
     "platform-dev": [],
     "platform-overrides": {
-        "php": "5.5"
+        "php": "7.0"
     }
 }

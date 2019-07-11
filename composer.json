@@ -23,11 +23,6 @@
   },
   
   "repositories": [
-    {"type": "vcs", "url": "http://dev/git/ufds/ruckusing-migrations.git"},
-    {"type": "vcs", "url": "http://dev/git/ufds/libdatabase.git"},
-    {"type": "vcs", "url": "http://dev/git/ufds/libutil.git"},
-    {"type": "vcs", "url": "http://dev/git/ufds/libtypes.git"},
-    {"type": "vcs", "url": "http://dev/git/ufds/librest.git"},
-    {"type": "vcs", "url": "http://dev/git/ufds/libcommon.git"}
+    {"type": "composer","url": "http://dev.ufds.org/satis"}
   ]
 }

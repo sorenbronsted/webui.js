@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>WebUi Sample</title>
-    <link rel="stylesheet" href="../www/css/ufds.css"/>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>WebUi Sample</title>
+	<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" >
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="/css/datepicker.css" rel="stylesheet">
+	<link href="/css/w3-app.css" rel="stylesheet">
 </head>
 <body>
-<nav id="menu">
-    <div id="Tab">
-        <nav class="home">
-            <a data-type="tab" href="">WebUI</a>
-        </nav>
-        <nav class="topmenu" id="navbar">
-            <ul id="topmenu" data-class="Tab">
-                <li class="">
-                    <a data-property="persons" data-type="tab" href="/list/Person">Personer</a>
-                </li>
-            </ul>
-        </nav>
-        <nav class="tablist" id="tablist">
-            <ul id="tablist1" class="tabgroup" data-class="Tab">
-                <li>
-                    <a data-property="person" data-type="tab" href="/list/Person">Personer</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+
+<nav>
+	<nav class="w3-row w3-bar w3-blue">
+
+		<div class="w3-half">
+			<a class="w3-bar-item w3-button topbar" href="/">WebUI</a>
+			<a class="w3-bar-item w3-button topbar w3-light-blue" href="">Personer</a>
+		</div>
+
+		<div class="w3-half">
+			<span class="w3-bar-item w3-purple topbar">Ingen valgt</span>
+		</div>
+
+	</nav>
+
+	<nav class="w3-bar w3-light-blue">
+		<a class="w3-bar-item w3-button w3-bottombar w3-border-purple" href="">Personer</a>
+	</nav>
 </nav>
-<main id="content"></main>
+
+<div id="content" class="w3-container">
+
+</div>
 <footer>
-    <!-- script src="src/sw.js"></script -->
-    <script src="src/webui.js"></script>
+	<!-- script src="/sw.js"></script -->
+	<script src="/js/main.bundle.js"></script>
 </footer>
 </body>
 </html>

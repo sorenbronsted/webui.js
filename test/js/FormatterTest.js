@@ -23,9 +23,9 @@ describe('Formatter tests', function() {
 			let source = row[0];
 			let result = row[1];
 			let test = formatter.display('number', source, '0,0');
-			assert.equal(test, result);
+			assert.strictEqual(test, result);
 			test = formatter.internal('number', test, '0,0');
-			assert.equal(test, source);
+			assert.strictEqual(test, source);
 		});
 	});
 
@@ -37,9 +37,9 @@ describe('Formatter tests', function() {
 		]);
 		for(let [source, result] of fixtures) {
 			var test = formatter.display('number', source, '0,0.00');
-			assert.equal(test, result);
+			assert.strictEqual(test, result);
 			test = formatter.internal('number', test, '0,0.00');
-			assert.equal(test, source);
+			assert.strictEqual(test, source);
 		}
 	});
 
@@ -50,14 +50,14 @@ describe('Formatter tests', function() {
 		]);
 		for(let [source, result] of fixtures) {
 			var test = formatter.display('casenumber', source);
-			assert.equal(test, result);
+			assert.strictEqual(test, result);
 			test = formatter.internal('casenumber', test);
-			assert.equal(test, source);
+			assert.strictEqual(test, source);
 		}
 		test = formatter.internal('casenumber', '101/98');
-		assert.equal(test, 19980101);
+		assert.strictEqual(test, 19980101);
 		test = formatter.internal('casenumber', '101/10');
-		assert.equal(test, 20100101);
+		assert.strictEqual(test, 20100101);
 	});
 
 	it("Should convert to a date", function() {
@@ -65,10 +65,10 @@ describe('Formatter tests', function() {
 		let result = '23-10-2015';
 
 		let test = formatter.display('date', source, 'DD-MM-YYYY');
-		assert.equal(test, result);
+		assert.strictEqual(test, result);
 
 		test = formatter.internal('date', result, 'DD-MM-YYYY');
-		assert.equal(test, source);
+		assert.strictEqual(test, source);
 	});
 
 	it("Should convert to a datetime", function() {
@@ -76,29 +76,34 @@ describe('Formatter tests', function() {
 		let result = '23-10-2015 11:12';
 
 		let test = formatter.display('datetime', source, 'DD-MM-YYYY HH:mm');
-		assert.equal(test, result);
+		assert.strictEqual(test, result);
 
 		test = formatter.internal('datetime', result, 'DD-MM-YYYY HH:mm');
-		assert.equal(test, source);
+		assert.strictEqual(test, source);
 	});
 
 	it("Should be empty", function() {
-		assert.equal(undefined, formatter.display(undefined, undefined));
-		assert.equal('', formatter.display(undefined, null));
-		assert.equal('', formatter.display(undefined, 'null'));
-		assert.notEqual('', formatter.display('string', 'x'));
+		assert.strictEqual(undefined, formatter.display(undefined, undefined));
+		assert.strictEqual('', formatter.display(undefined, null));
+		assert.strictEqual('', formatter.display(undefined, 'null'));
+		assert.strictEqual('', formatter.display('casenumber', ''));
+		assert.strictEqual('', formatter.display('date', ''));
+		assert.strictEqual('', formatter.display('time', ''));
+		assert.strictEqual('', formatter.display('number', ''));
+
+		assert.notStrictEqual('', formatter.display('string', 'x'));
 	});
 
 	it("Should have a value", function() {
-		assert.equal('x', formatter.display(undefined, 'x'));
-		assert.equal('x', formatter.internal(undefined, 'x'));
-		assert.equal('x', formatter.display('string', 'x'));
-		assert.equal('x', formatter.internal('string', 'x'));
-		assert.equal('x', formatter.display('date', 'x'));
-		assert.equal('x', formatter.internal('date', 'x'));
-		assert.equal('x', formatter.display('number', 'x'));
-		assert.equal('x', formatter.internal('number', 'x'));
-		assert.equal('x', formatter.display('casenumber', 'x'));
-		assert.equal('x', formatter.internal('casenumber', 'x'));
+		assert.strictEqual('x', formatter.display(undefined, 'x'));
+		assert.strictEqual('x', formatter.internal(undefined, 'x'));
+		assert.strictEqual('x', formatter.display('string', 'x'));
+		assert.strictEqual('x', formatter.internal('string', 'x'));
+		assert.strictEqual('x', formatter.display('date', 'x'));
+		assert.strictEqual('x', formatter.internal('date', 'x'));
+		assert.strictEqual('x', formatter.display('number', 'x'));
+		assert.strictEqual('x', formatter.internal('number', 'x'));
+		assert.strictEqual('x', formatter.display('casenumber', 'x'));
+		assert.strictEqual('x', formatter.internal('casenumber', 'x'));
 	});
 });

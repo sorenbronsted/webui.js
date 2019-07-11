@@ -1,0 +1,90 @@
+
+textarea:disabled, input:disabled {
+    border-bottom: none;
+    background-color: transparent;
+    color: inherit;
+}
+
+select {
+    background-color: transparent;
+}
+
+.material-icons {
+    vertical-align: -14%
+}
+
+.error {
+    background-color: #ffe6e6;
+}
+
+.topbar {
+    height: 40px;
+}
+
+.default-width {
+    width: 450px
+}
+
+.th-icon {
+    width: 40px;
+}
+
+.th-checkbox {
+    width: 40px;
+}
+
+.th-date {
+    width: 120px;
+}
+
+.th-case-no {
+    width: 130px;
+}
+
+.th-cpr {
+    width: 140px;
+}
+
+.th-timestamp {
+    width: 170px;
+}
+
+.th1 {
+    width: 10%;
+}
+
+.th2 {
+    width: 20%;
+}
+
+.th3 {
+    width: 30%;
+}
+
+.th4 {
+    width: 40%;
+}
+
+.th5 {
+    width: 50%;
+}
+
+.th6 {
+    width: 60%;
+}
+
+.th7 {
+    width: 70%;
+}
+
+.th8 {
+    width: 80%;
+}
+
+.th9 {
+    width: 90%;
+}
+
+.th10 {
+    width: 100%;
+}

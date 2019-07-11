@@ -18,7 +18,6 @@ describe('Select', function() {
 
 	beforeEach(function() {
 		let browser = new TestBrowser();
-		let css = new ui.CssDelegate();
 		view = new TestView(browser.window,
 			`<div data-class="MyClass"><select data-property="value_uid" data-list="MyValue" data-list-display="text"></select></div>`);
 		doc = browser.window.document;
@@ -26,14 +25,14 @@ describe('Select', function() {
 
 	it('Should contain a value on populate', function() {
 		// Initial should be empty
-		assert.equal(view.isVisible, false);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isVisible, false);
+		assert.strictEqual(view.isDirty, false);
+		assert.strictEqual(view.isValid, true);
 
 		view.show();
 		let select = doc.querySelector("select");
-		assert.equal(select.value, '');
-		assert.equal(select.length, 0);
+		assert.strictEqual(select.value, '');
+		assert.strictEqual(select.length, 0);
 
 		// Populate
 		let object = new MyClass();
@@ -41,43 +40,43 @@ describe('Select', function() {
 		let values = new MyValue();
 		values.addAll(collect(JSON.parse('[{"MyValue":{"uid":1,"text":"load 1"}},{"MyValue":{"uid":2,"text":"load 2"}}]')));
 
-		view.populate(MyClass.name, object.getAll().first());
+		view.populate(MyClass.name, object.get(1));
 		view.populate(MyValue.name, values.getAll());
 
 		// Should contain value
-		assert.equal(view.isVisible, true);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isVisible, true);
+		assert.strictEqual(view.isDirty, false);
+		assert.strictEqual(view.isValid, true);
 
-		assert.equal(select.length, 3);
-		assert.equal(select.value, '1');
+		assert.strictEqual(select.length, 2);
+		assert.strictEqual(select.value, '1');
 	});
 
 	it('Should have a datalist', function() {
 		let list = view.dataLists;
-		assert.notEqual(list, null);
-		assert.equal(list.count(), 1);
-		assert.equal(list.first(), MyValue.name);
+		assert.notStrictEqual(list, null);
+		assert.strictEqual(list.count(), 1);
+		assert.strictEqual(list.first(), MyValue.name);
 	});
 
 	it('Should be valid on focus', function() {
 		view.isValid = false;
-		assert.equal(view.isValid, false);
+		assert.strictEqual(view.isValid, false);
 
 		view.show();
 		let elem = doc.querySelector("select");
 		elem.focus();
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isValid, true);
 	});
 
 	it('Should be dirty on text change', function() {
-		assert.equal(view.isDirty, false);
+		assert.strictEqual(view.isDirty, false);
 		view.show();
 		let elem = doc.querySelector("select");
 		let e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.equal(view.isDirty, true);
-		assert.equal(view.eventName, view.eventPropertyChanged);
+		assert.strictEqual(view.isDirty, true);
+		assert.strictEqual(view.eventName, view.eventPropertyChanged);
 	});
 });

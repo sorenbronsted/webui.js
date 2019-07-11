@@ -1,7 +1,7 @@
 <?php
 namespace ufds;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * This class provides basic CRUD (Create,Read,Update,Delete) testing
@@ -9,7 +9,7 @@ use PHPUnit_Framework_TestCase;
  * and it load mandatory properties on it as well.
  * You must override updateObject where you modify the properties of an object.
  */
-abstract class BaseCrud extends PHPUnit_Framework_TestCase {
+abstract class BaseCrud extends TestCase {
 	private $class = null;
 
 	public function __construct($class) {
@@ -17,7 +17,7 @@ abstract class BaseCrud extends PHPUnit_Framework_TestCase {
 		$this->class = $class;
 	}
 
-	protected function setUp() {
+	protected function setUp(): void {
 		TestHelper::all();
 	}
 

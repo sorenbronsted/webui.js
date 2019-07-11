@@ -7,15 +7,16 @@ const assert = require('assert');
 class MyClass extends mvc.BaseProxy {
 	constructor() {
 		super();
-		this._someProperty = '';
+		this.someProperty = null;
+		this._property = null;
 	}
 
-	get someProperty() {
-		return this._someProperty;
+	get properties() {
+		return {someProperty:this.someProperty};
 	}
 
-	set someProperty(value) {
-		this._someProperty = value;
+	set propertyByElement(element) {
+		this._property = element;
 	}
 }
 
@@ -31,15 +32,16 @@ describe('BaseProxy', function() {
 
 		it('Should exists', function() {
 			proxy.add(serverResult);
-			assert.equal(proxy.size(), 1);
+			assert(proxy.size() === 1);
 		});
 
 		it('Should be the same', function() {
 			proxy.add(serverResult);
 			let o = proxy.get(1);
-			assert.notEqual(o, undefined);
-			assert.equal(o.uid, 1);
-			assert.equal(o.name, 'load');
+			assert(o !== undefined);
+			assert(o.uid === 1);
+			assert(o.name === 'load');
+			assert(proxy.has(1) === true)
 		});
 
 		it('Should fail on different class', function() {
@@ -62,19 +64,19 @@ describe('BaseProxy', function() {
 
 		it('Should exists', function() {
 			proxy.addAll(serverResult);
-			assert.equal(proxy.size(), 2);
+			assert.strictEqual(proxy.size(), 2);
 		});
 
 		it('Should be same size', function() {
 			proxy.addAll(serverResult);
 			let size = 0;
-			proxy.getAll().each(o => {
-				assert.notEqual(o, undefined);
-				assert.equal(o.uid, size + 1); // Uses size to simulate uids
+			proxy.getAll().objects.each(o => {
+				assert(o !== undefined);
+				assert(o.uid === size + 1); // Uses size to simulate uids
 				size++;
 			});
-			assert.equal(size, 2);
-			assert.equal(proxy.size(), size);
+			assert(size === 2);
+			assert(proxy.size() === size);
 		});
 	});
 
@@ -86,9 +88,9 @@ describe('BaseProxy', function() {
 
 		it('Should end on zero', function() {
 			proxy.add(serverResult);
-			assert.equal(proxy.size(), 1);
+			assert(proxy.size() === 1);
 			proxy.remove(1);
-			assert.equal(proxy.size(), 0);
+			assert(proxy.size() === 0);
 		});
 	});
 
@@ -98,19 +100,54 @@ describe('BaseProxy', function() {
 			proxy = new MyClass();
 		});
 
-		it('Should exists', function() {
+		it('Should exists and set a property', function() {
 			proxy.add(serverResult);
-			proxy.setProperty(new mvc.ElementValue(MyClass.name, 'name', 1, 'test2'));
+			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name, 'name', 1, 'test2'));
 			let o = proxy.get(1);
-			assert.notEqual(undefined, o);
-			assert.equal('test2', o.name);
+			assert(undefined !== o);
+			assert('test2' === o.name);
 		});
 
-		it('Should set ownproperty', function() {
-			assert.equal('', proxy.someProperty);
-			proxy.setProperty(new mvc.ElementValue(MyClass.name,'someProperty', undefined, 'someValue'));
-			assert.equal('someValue', proxy.someProperty);
-			assert.equal(undefined, proxy.get(1));
+		it('Should set someProperty via setPropertyByElement', function() {
+			assert.strictEqual(proxy.someProperty, null);
+			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name,'someProperty', undefined, 'someValue'));
+			assert.strictEqual(proxy.someProperty, 'someValue');
+			assert.strictEqual(proxy.get(1), null);
+		});
+
+		it('Should set someProperty via setProperty', function() {
+			assert.strictEqual(proxy.someProperty, null);
+			proxy.setProperty('someProperty', 'someValue');
+			assert.strictEqual(proxy.someProperty, 'someValue');
+			assert.strictEqual(proxy.get(1), null);
+		});
+
+		it('Should set elementProperty', function() {
+			assert.strictEqual(proxy._property, null);
+			let elementValue = new mvc.ElementValue(MyClass.name,'property', undefined, 'someValue');
+			proxy.setPropertyByElement(elementValue);
+			assert.strictEqual(proxy._property, elementValue);
+			assert.strictEqual(proxy.get(1), null);
+		});
+
+		it('Should fail on property not found on object', function() {
+			let elementValue = new mvc.ElementValue(MyClass.name, 'my', 2, 'test2');
+			assert.throws(() => { proxy.setPropertyByElement(elementValue) },/Cannot set property 'my' of null/);
+		});
+
+		it('Should fail on property via setPropertyByElement', function() {
+			let elementValue = new mvc.ElementValue(MyClass.name, 'my', undefined, 'test2');
+			assert.throws(() => { proxy.setPropertyByElement(elementValue) },/Property not found: my/);
+		});
+
+		it('Should fail on property via setProperty', function() {
+			assert.throws(() => { proxy.setProperty('my', 'test') },/Property not found: my/);
+		});
+
+		it('Should return properties', function() {
+			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name,'someProperty', undefined, 'someValue'));
+			assert.strictEqual(proxy.someProperty, 'someValue');
+			assert(proxy.properties, {someProperty:'someValue'});
 		});
 	});
 });

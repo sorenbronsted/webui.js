@@ -21,7 +21,7 @@ describe('Button', function() {
 		object = new MyClass();
 		object.add(JSON.parse('{"MyClass":{"uid":1,"name":"load","active":"true"}}'));
 		view.show();
-		view.populate(MyClass.name, object.getAll().first());
+		view.populate(MyClass.name, object.get(1));
 	});
 
 	it('button.validateAndfire', function() {

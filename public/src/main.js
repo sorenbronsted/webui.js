@@ -1,21 +1,21 @@
 'use strict';
 
-const collect = require('collect.js');
 const mvc = require('../../lib/src/mvc');
 const ui = require('../../lib/src/ui');
-const app = require('./Person.js');
+const app = require('./app.js');
 
 async function main() {
 
-	var rest = new mvc.Rest(new XMLHttpRequest());
-	var store = new mvc.RestStore(rest);
-	var css = new ui.CssDelegate(new ui.InputCssUfds(), new ui.AnchorCss(), new ui.TableCssUfds(window.document));
+	var rest   = new mvc.Rest(XMLHttpRequest);
+	var store  = new mvc.RestStore(rest, FormData);
+	let css    = new ui.CssDelegate(new ui.InputCssW3(), new ui.AnchorCssW3(), new ui.TableCssW3(window.document));
 	var router = new mvc.Router(window);
 	
 	// Add elements to repo
 	let repo = new mvc.Repo();
 	repo.add(router);
 	repo.add(new app.Person(store));
+	repo.add(new app.Gender(store));
 	repo.add(new mvc.CurrentViewState());
 
 	// Load views and add controllers

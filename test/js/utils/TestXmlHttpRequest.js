@@ -109,5 +109,4 @@ class TestXmlHttpRequest {
 		}
 	}
 }
-
 exports.TestXmlHttpRequest = TestXmlHttpRequest;

@@ -24,24 +24,21 @@ class TestMvcView extends mvc.Subject {
 	constructor(url = 'https://example.org/') {
 		super();
 		this.cls = this.constructor.name;
-		this.eventPropertyChanged = `${this.cls}/PropertyChanged`;
-		this.eventClick = `${this.cls}/Click`;
+		this.eventPropertyChanged = `propertyChanged`;
+		this.eventClick = `click`;
 		this.visible = false;
-		this.value = null;
+		this.values = collect({});
 		this.error = null;
 		this.window = new Window(url);
+		this.message = null;
+		this.confirmAnswer = null;
+		this.dataLists = collect({});
+		this.classes = collect({});
+		this.classes.put(TestProxy.name, TestProxy.name);
 	}
 
 	get location() {
 		return this.window.location;
-	}
-
-	get classes() {
-		return collect([TestProxy.name]);
-	}
-
-	get dataLists() {
-		return collect([]);
 	}
 
 	get isDirty() {
@@ -49,12 +46,12 @@ class TestMvcView extends mvc.Subject {
 	}
 
 	populate(sender, value) {
-		this.value = value;
+		this.values.put(sender, value);
 	}
 
 	showErrors(value) {
 		this.error = value;
-		console.log(this.error);
+		//console.log(this.error);
 	}
 
 	show() {
@@ -62,12 +59,16 @@ class TestMvcView extends mvc.Subject {
 	}
 
 	validateAndfire(event, validate, elementValue) {
-		this.fire(event, elementValue);
+		this.fire(new mvc.Event(this.constructor.name, event, elementValue));
+	}
+
+	alert(message) {
+		this.message = message;
 	}
 
 	confirm(question) {
-		return true;
+		this.message = question;
+		return this.confirmAnswer;
 	}
 }
-
 exports.TestMvcView = TestMvcView;

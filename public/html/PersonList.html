@@ -1,18 +1,21 @@
 <section id="PersonList">
-    <section id="functions">
-        <button name="create" class="primary" data-class="Person">Tilføj</button>
-    </section>
-    <table data-class="Person">
-        <thead>
-        <tr>
-            <th data-link="delete" data-property="uid">&nbsp;</th>
-            <th data-link="edit" data-property="name" class="sortable">Name</th>
-            <th data-property="address" class="sortable">Address</th>
-            <th data-property="zipcode" class="sortable">Zipcode</th>
-            <th data-property="town" class="sortable">Town</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+	<section class="w3-bar w3-card-2 w3-margin-top">
+		<button name="create" class="w3-bar-item w3-button w3-blue" data-class="Person">Tilføj</button>
+	</section>
+
+	<section class="w3-card-2 w3-margin-top">
+		<table class="w3-table w3-striped" data-class="Person">
+			<thead  class="w3-light-gray">
+				<tr>
+					<th data-link="delete" data-property="uid" class="th-icon"></th>
+					<th data-link="edit" data-property="name" class="sortable">Name</th>
+					<th data-property="address" class="sortable">Address</th>
+					<th data-property="zipcode" class="sortable">Zipcode</th>
+					<th data-property="town" class="sortable">Town</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</section>
 </section>

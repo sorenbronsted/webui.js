@@ -5,22 +5,16 @@ class SimulatedPromise {
 	}
 
 	then(fn) {
-		let result;
-		try {
+		if (this.data === undefined || this.data.constructor.name !== 'Error') {
 			fn(this.data);
 		}
-		catch (e) {
-			result = e;
-		}
-		return new SimulatedPromise(result);
+		return this;
 	}
 
 	catch(fn) {
-		if (this.data === undefined) {
-			return;
+		if (this.data !== undefined && this.data.constructor.name === 'Error') {
+			fn(this.data);
 		}
-		fn(this.data);
 	}
 }
-
 exports.SimulatedPromise = SimulatedPromise;

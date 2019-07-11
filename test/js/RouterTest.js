@@ -24,35 +24,34 @@ describe('Router', function() {
 	});
 
 	it('Should goto the given url', function() {
-		assert.equal(browser.history.length, 1);
-		assert.equal(browser.history.state, null);
+		assert.strictEqual(browser.history.length, 1);
+		assert.strictEqual(browser.history.state, null);
 		router.goto('somewhere');
-		assert.equal(browser.history.length, 2);
-		assert.equal(browser.location, url+"somewhere");
-		assert.equal(observer.sender, mvc.Router.name);
-		assert.equal(observer.body, 'somewhere');
+		assert.strictEqual(browser.history.length, 2);
+		assert.strictEqual(browser.location, url+"somewhere");
+		assert.strictEqual(observer.root.sender, mvc.Router.name);
+		assert.strictEqual(observer.root.name, router.eventOk);
+		assert.strictEqual(observer.root.body, 'somewhere');
 	});
 
 	it('Should goto the given url from the pop state event', function() {
 		router.goto('somewhere');
-		observer.reset();
-		assert.equal(browser.location, url+"somewhere");
+		assert.strictEqual(browser.location, url+"somewhere");
 		browser.history.back();
-		assert.equal(observer.body, '/');
+		assert.strictEqual(observer.root.body, '/');
 	});
 
 	it('Should goto then given url from back', function() {
 		router.goto(url+'somewhere1');
 		router.goto(url+'somewhere2');
-		assert.equal(browser.location, url+'somewhere2');
+		assert.strictEqual(browser.location, url+'somewhere2');
 		router.back();
-		assert.equal(browser.location, url+'somewhere1');
+		assert.strictEqual(browser.location, url+'somewhere1');
 	});
 
 	it('Should goto the given url from reload', function() {
 		router.goto(url+'somewhere');
-		observer.reset();
 		router.reload();
-		assert.equal(observer.body, '/somewhere');
+		assert.strictEqual(observer.root.body, '/somewhere');
 	});
 });

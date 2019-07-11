@@ -1,25 +1,35 @@
 <section id="PersonDetail">
-    <section id="functions">
-        <button name="cancel" data-class="Person" class="default" data-validate="false">Fortryd</button>
-        <button name="save" class="primary" data-class="Person">Gem</button>
-    </section>
+	<section class="w3-bar w3-card-2 w3-margin-top">
+		<button name="cancel" data-class="Person" class="w3-bar-item w3-button w3-blue" data-validate="false">Fortryd
+		</button>
+		<button name="save" class="w3-bar-item w3-button w3-blue" data-class="Person">Gem</button>
+	</section>
 
-    <section id="detail">
-        <fieldset>
-            <legend>Person</legend>
-            <form data-class="Person">
-                <label for="name">Name</label>
-                <input id="name" type="text" data-property="name" required="required"/>
-                <br/>
-                <label for="address">Address</label>
-                <input id="address" type="text" data-property="address" required="required"/>
-                <br/>
-                <label for="zipcode">Zipcode</label>
-                <input id="zipcode" type="text" data-property="zipcode" required="required"/>
-                <br/>
-                <label for="town">Town</label>
-                <input id="town" type="text" data-property="town" required="required"/>
-            </form>
-        </fieldset>
-    </section>
+	<section id="detail">
+		<div class="w3-container w3-cell w3-card-2 w3-margin-top w3-margin-right w3-left default-width">
+			<h4>Person</h4>
+			<div class="w3-padding-16">
+				<form data-class="Person">
+					<label for="name" class="w3-label w3-text-gray">Name</label>
+					<input id="name" type="text" data-property="name" required="required" class="w3-input">
+
+					<label for="address" class="w3-label w3-text-gray">Address</label>
+					<input id="address" type="text" data-property="address" required class="w3-input">
+
+					<label for="zipcode" class="w3-label w3-text-gray">Zipcode</label>
+					<input id="zipcode" type="text" data-property="zipcode" required class="w3-input">
+
+					<label for="town" class="w3-label w3-text-gray">Town</label>
+					<input id="town" type="text" data-property="town" required class="w3-input">
+
+					<label for="birthdate" class="w3-label w3-text-gray">Birthdate</label>
+					<input id="birthdate" type="text" data-property="birthdate" data-type="date" data-format="DD-MM-YYYY" class="w3-input">
+
+					<label for="gender" class="w3-label w3-text-gray">Gender</label>
+					<select id="gender" data-property="gender" data-list="Gender" data-list-display="name" data-list-default-option="Vælg" class="w3-select"></select>
+					<!-- select id="gender" data-property="gender" data-list="Gender" data-list-display="name"></select -->
+				</form>
+			</div>
+		</div>
+	</section>
 </section>

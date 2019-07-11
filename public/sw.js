@@ -42,25 +42,16 @@ class ServiceWorker {
 	}
 
 	run() {
-		//main();
+		main();
 	}
 }
 
 var CACHE_NAME = 'webui-v1';
 var urlsToCache = [
-	'asset/application.css',
-	'asset/glyphicons-halflings-regular.eot',
-	'asset/glyphicons-halflings-regular.svg',
-	'asset/glyphicons-halflings-regular.ttf',
-	'asset/glyphicons-halflings-regular.woff',
-	'asset/glyphicons-halflings-regular.woff2',
-	'asset/materialicons.css',
-	'asset/materialicons.ttf',
-	'asset/table.css',
-	'asset/w3.css',
-	'html/PersonDetail.html',
-	'html/PersonList.html',
-	'src/main.bundle.js'
+	'/css/w3-app.css',
+	'/html/PersonDetail.html',
+	'/html/PersonList.html',
+	'/js/main.bundle.js'
 ];
 
 let sw = new ServiceWorker(self, CACHE_NAME, urlsToCache);

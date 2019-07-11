@@ -11,7 +11,7 @@ describe('Proxy', function() {
 
 		it('Should get the same object', function() {
 			let object2 = repo.get(object.constructor.name);
-			assert.equal(object.uid, object2.uid);
+			assert.strictEqual(object.uid, object2.uid);
 		});
 
 		it('Should fail', function() {

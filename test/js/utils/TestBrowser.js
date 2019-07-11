@@ -32,5 +32,4 @@ class TestBrowser {
 		this._history._onpopstate = handler;
 	}
 }
-
 exports.TestBrowser = TestBrowser;

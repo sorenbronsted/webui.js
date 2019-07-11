@@ -23,7 +23,6 @@ describe('Table', function() {
 		)));
 
 		let browser = new TestBrowser();
-		let css = new ui.CssDelegate();
 		view = new TestView(browser.window,
 			`<table data-class="MyClass">
 				<thead>
@@ -43,56 +42,56 @@ describe('Table', function() {
 	it('Should contain rows on populate', function() {
 		let table = doc.querySelector("table");
 		// Initial should be empty
-		assert.equal(table.tHead.rows.length, 1);
-		assert.equal(table.tBodies.length, 0);
+		assert.strictEqual(table.tHead.rows.length, 1);
+		assert.strictEqual(table.tBodies.length, 0);
 
 		// Populate
 		view.populate(MyClass.name, object.getAll());
 
 		// Should contain value
-		assert.equal(table.tBodies.length, 1);
+		assert.strictEqual(table.tBodies.length, 1);
 
 		let rows = table.tBodies.item(0).getElementsByTagName('tr');
-		assert.notEqual(rows, null);
-		assert.equal(rows.length, 2);
+		assert.notStrictEqual(rows, null);
+		assert.strictEqual(rows.length, 2);
 
 		let links = table.tBodies.item(0).getElementsByTagName('a');
-		assert.notEqual(links, null);
-		assert.equal(links.length, 6);
+		assert.notStrictEqual(links, null);
+		assert.strictEqual(links.length, 6);
 
 		// load links
 		for(let link of links) {
 			link.click();
-			assert.notEqual(view.eventName, null);
-			assert.notEqual(view.body.cls, null);
-			assert.notEqual(view.body.property, null);
-			assert.notEqual(view.body.uid, null);
-			assert.notEqual(view.body.value, null);
+			assert.notStrictEqual(view.eventName, null);
+			assert.notStrictEqual(view.body.cls, null);
+			assert.notStrictEqual(view.body.property, null);
+			assert.notStrictEqual(view.body.uid, null);
+			assert.notStrictEqual(view.body.value, null);
 		}
 
 		// load callbacks
-		assert.equal(view.onTableRowCalled, true);
-		assert.equal(view.onTableCellValueCalled, true);
-		assert.equal(view.onTableCellLink, true);
+		assert.strictEqual(view.onTableRowCalled, true);
+		assert.strictEqual(view.onTableCellValueCalled, true);
+		assert.strictEqual(view.onTableCellLink, true);
 	});
 
 	it('Should contain no rows on populate', function() {
 		let table = doc.querySelector("table");
 		// Initial should be empty
-		assert.equal(table.tHead.rows.length, 1);
-		assert.equal(table.tBodies.length, 0);
+		assert.strictEqual(table.tHead.rows.length, 1);
+		assert.strictEqual(table.tBodies.length, 0);
 
 		// Populate
-		view.populate(MyClass.name, collect([]));
+		view.populate(MyClass.name, {objects: collect([])});
 
-		assert.equal(table.tBodies.length, 1);
+		assert.strictEqual(table.tBodies.length, 1);
 
 		let cells = table.getElementsByTagName('td');
-		assert.notEqual(cells, null);
-		assert.equal(cells.length, 1);
+		assert.notStrictEqual(cells, null);
+		assert.strictEqual(cells.length, 1);
 
 		let colspan = cells[0].attributes.getNamedItem('colspan');
-		assert.notEqual(colspan, null);
-		assert.equal(colspan.value, table.getElementsByTagName('th').length);
+		assert.notStrictEqual(colspan, null);
+		assert.strictEqual(parseInt(colspan.value), table.getElementsByTagName('th').length);
 	});
 });

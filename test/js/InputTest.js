@@ -13,12 +13,13 @@ describe('Input', function() {
 	let object;
 	let view;
 	let doc;
+	let observer;
 
 	beforeEach(function() {
 		let browser = new TestBrowser();
 		view = new TestView(browser.window,
 			`<div data-class="MyClass">
-				<input data-property="text">
+				<input data-property="text" autofocus>
 				<input type="file" data-property="file">
 				<input type="checkbox" value="1" data-property="checkbox">
 				<input type="file" data-property="file">
@@ -28,14 +29,14 @@ describe('Input', function() {
 		`);
 		doc = browser.window.document;
 		object = new MyClass();
-		object.add(JSON.parse('{"MyClass":{"uid":1,"text":"load", "checkbox":"1", "gender":"female"}}'));
+		object.add(JSON.parse('{"MyClass":{"uid":1,"text":"load", "checkbox":1, "gender":"female"}}'));
 	});
 
 	it('Should contain a value on populate', function() {
 		// Initial should be empty
-		assert.equal(view.isVisible, false);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isVisible, false);
+		assert.strictEqual(view.isDirty, false);
+		assert.strictEqual(view.isValid, true);
 
 		// Make visible
 		view.show();
@@ -45,92 +46,94 @@ describe('Input', function() {
 		let file = doc.querySelector("input[data-property=file]");
 		let male = doc.querySelector("#male");
 		let female = doc.querySelector("#female");
-		assert.equal(text.value, '');
-		assert.equal(file.value, '');
-		assert.equal(checkbox.checked, false);
-		assert.equal(male.checked, true);
-		assert.equal(female.checked, false);
+		assert.strictEqual(text.value, '');
+		assert.strictEqual(file.value, '');
+		assert.strictEqual(checkbox.checked, false);
+		assert.strictEqual(male.checked, true);
+		assert.strictEqual(female.checked, false);
 
 		// Populate it
-		view.populate(MyClass.name, object.getAll().first());
+		view.populate(MyClass.name, object.get(1));
 
 		// Should contain value
-		assert.equal(view.isVisible, true);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
-		assert.equal(text.value, 'load');
-		assert.equal(file.value, '');
-		assert.equal(checkbox.checked, true);
-		assert.equal(male.checked, false);
-		assert.equal(female.checked, true);
+		assert.strictEqual(view.isVisible, true);
+		assert.strictEqual(view.isDirty, false);
+		assert.strictEqual(view.isValid, true);
+		assert.strictEqual(text.value, 'load');
+		assert.strictEqual(file.value, '');
+		assert.strictEqual(checkbox.checked, true);
+		assert.strictEqual(male.checked, false);
+		assert.strictEqual(female.checked, true);
 	});
 
 	it('Should be valid on focus', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");
 		view.isValid = false;
-		assert.equal(view.isValid, false);
+		assert.strictEqual(view.isValid, false);
 		elem.focus();
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isValid, true);
 	});
 
 	it('Should be dirty on keypress', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");
-		assert.equal(view.isDirty, false);
+		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('keypress', false, true);
 		elem.dispatchEvent(e);
-		assert.equal(view.isDirty, true);
+		assert.strictEqual(view.isDirty, true);
 	});
 
 	it('Should be dirty on text change', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");
-		assert.equal(view.isDirty, false);
+		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.equal(view.isDirty, true);
+		assert.strictEqual(view.isDirty, true);
 	});
 
 	it('Should be dirty on file change', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=file]");
-		assert.equal(view.isDirty, false);
+		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.equal(view.isDirty, true);
+		assert.strictEqual(view.isDirty, true);
 	});
 
 	it('Should be dirty on checkbox change', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=checkbox]");
-		assert.equal(view.isDirty, false);
+		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.equal(view.isDirty, true);
+		assert.strictEqual(view.isDirty, true);
+		assert.strictEqual(view.body.value, 0); // because it is not checked
 	});
 
 	it('Should be dirty on radio change', function() {
 		view.show();
 		let elem = doc.querySelector("#male");
-		assert.equal(view.isDirty, false);
+		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.equal(view.isDirty, true);
+		assert.strictEqual(view.isDirty, true);
+		assert.strictEqual(view.body.value, 'male');
 	});
 
-	it('Should fire event on blur', function() {
+	it('Should fire event on blur for type text', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");
 		elem.value = 'test';
 		elem.focus();
 		elem.blur();
-		assert.equal(view.eventName, view.eventPropertyChanged);
+		assert.strictEqual(view.eventName, view.eventPropertyChanged);
 	});
 
 	it('Should fire event on key enter', function() {
@@ -140,6 +143,6 @@ describe('Input', function() {
 		e.initEvent('keydown', false, true);
 		e.keyCode = 13;
 		elem.dispatchEvent(e);
-		assert.equal(view.eventName, view.eventPropertyChanged);
+		assert.strictEqual(view.eventName, view.eventPropertyChanged);
 	});
 });

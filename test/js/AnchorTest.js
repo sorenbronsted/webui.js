@@ -16,32 +16,32 @@ describe('Anchor', function() {
 		view = new TestView(browser.window,
 			`<div data-class="BaseProxy"><a data-property="name" data-uid="1" data-type="menu"></a></div>`);
 		object = new mvc.BaseProxy();
-		object.add(JSON.parse('{"BaseProxy":{"uid":1,"name":"load","active":"true"}}'));
+		object.add(JSON.parse('{"BaseProxy":{"uid":1,"name":"load","active":"true","visible":"true"}}'));
 		view.show();
-		view.populate(mvc.BaseProxy.name, object.getAll().first());
+		view.populate(mvc.BaseProxy.name, object.get(1));
 	});
 
 	it('Should populate', function() {
-		assert.equal(view.isVisible, true);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isVisible, true);
+		assert.strictEqual(view.isDirty, false);
+		assert.strictEqual(view.isValid, true);
 		let elem = browser.window.document.querySelector("a");
-		assert.notEqual(elem, null);
-		assert.equal(elem.style.active, 'active');
-		assert.equal(elem.href, `${browser.location}load`);
+		assert.notStrictEqual(elem, null);
+		assert.strictEqual(elem.style.active, 'active');
+		assert.strictEqual(elem.href, `${browser.location}load`);
 	});
 
 	it('Should validateAndfire', function() {
-		assert.equal(view.isVisible, true);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isVisible, true);
+		assert.strictEqual(view.isDirty, false);
+		assert.strictEqual(view.isValid, true);
 		let elem = browser.window.document.querySelector("a");
 		elem.click();
-		assert.equal(view.eventName, view.eventClick);
-		assert.equal(view.isValidRequired, true);
-		assert.equal(view.body.elementValue.cls, mvc.BaseProxy.name);
-		assert.equal(view.body.elementValue.property, 'name');
-		assert.equal(view.body.elementValue.uid, '1');
-		assert.equal(view.body.elementValue.value, `${browser.location}load`);
+		assert.strictEqual(view.eventName, view.eventClick);
+		assert.strictEqual(view.isValidRequired, true);
+		assert.strictEqual(view.body.cls, mvc.BaseProxy.name);
+		assert.strictEqual(view.body.property, 'name');
+		assert.strictEqual(view.body.uid, 1);
+		assert.strictEqual(view.body.value, `${browser.location}load`);
 	});
 });

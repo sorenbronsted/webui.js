@@ -3,6 +3,7 @@ const assert = require('assert');
 const collect = require('collect.js');
 const mvc = require('../../lib/src/mvc');
 const TestXmlHttpRequest = require('./utils/TestXmlHttpRequest.js').TestXmlHttpRequest;
+const FormData = require('./utils/FormData.js').FormData;
 
 describe('Rest', function() {
 
@@ -20,8 +21,8 @@ describe('Rest', function() {
 		TestXmlHttpRequest.setResponseHeader('content-type','json');
 
 		let sample = await rest.get('http://somehost/json');
-		assert.notEqual(sample, null);
-		assert.equal(JSON.stringify(sample), TestXmlHttpRequest.responseText);
+		assert.notStrictEqual(sample,null);
+		assert.strictEqual(JSON.stringify(sample), TestXmlHttpRequest.responseText);
 	});
 
 	it('Should get other content', async function() {
@@ -30,8 +31,8 @@ describe('Rest', function() {
 		TestXmlHttpRequest.setResponseHeader('content-type','text');
 
 		let sample = await rest.get('http://somehost/text');
-		assert.notEqual(sample, null);
-		assert.equal(sample, TestXmlHttpRequest.responseText);
+		assert.notStrictEqual(sample, null);
+		assert.strictEqual(sample, TestXmlHttpRequest.responseText);
 	});
 
 	it('Should get error content', async function() {
@@ -42,11 +43,11 @@ describe('Rest', function() {
 
 		try {
 			let sample = await rest.get('http://somehost/error');
-			assert.fail('Expected an exception')
+			assert.strictEqual.fail('Expected an exception')
 		}
 		catch(e) {
 			if (e instanceof mvc.ApplicationException) {
-				assert.equal(e.error, 'operation failed');
+				assert.strictEqual(e.error, 'operation failed');
 			}
 		}
 	});
@@ -57,11 +58,11 @@ describe('Rest', function() {
 
 		try {
 			await rest.get('http://somehost/load');
-			assert.fail('Expected an exception')
+			assert.strictEqual.fail('Expected an exception')
 		}
 		catch(e) {
 			if (e instanceof Error) {
-				assert.equal(e.message, TestXmlHttpRequest.status)
+				assert.strictEqual(parseInt(e.message), TestXmlHttpRequest.status)
 			}
 		}
 	});
@@ -72,11 +73,11 @@ describe('Rest', function() {
 
 		try {
 			let sample = await rest.get('http://somehost/load');
-			assert.fail('Expected an exception')
+			assert.strictEqual.fail('Expected an exception')
 		}
 		catch(e) {
 			if (e instanceof Error) {
-				assert.equal(e.message, "Network Error")
+				assert.strictEqual(e.message, "Network Error")
 			}
 		}
 	});
@@ -87,8 +88,8 @@ describe('Rest', function() {
 		TestXmlHttpRequest.setResponseHeader('content-type','text');
 
 		let sample = await rest.delete('http://somehost/text');
-		assert.notEqual(sample, null);
-		assert.equal(sample, TestXmlHttpRequest.responseText);
+		assert.notStrictEqual(sample, null);
+		assert.strictEqual(sample, TestXmlHttpRequest.responseText);
 	});
 
 	it('Should execute post request', async function() {
@@ -96,12 +97,13 @@ describe('Rest', function() {
 		TestXmlHttpRequest.status = 200;
 		TestXmlHttpRequest.setResponseHeader('content-type','text');
 
-		let data = collect({'uid':1,'name':'Kurt humbuk'});
+		let data = new FormData();
+		data.append('uid', 1);
+		data.append('name', 'Kurt Humbuk');
 		let sample = await rest.post('http://somehost/text', data);
-		assert.notEqual(sample, null);
-		assert.equal(sample, TestXmlHttpRequest.responseText);
-		assert.equal(TestXmlHttpRequest.parameters, 'uid=1&name=Kurt%20humbuk');
-		assert.equal(TestXmlHttpRequest.header['Content-type'], 'application/x-www-form-urlencoded');
+		assert.notStrictEqual(sample, null);
+		assert.strictEqual(sample, TestXmlHttpRequest.responseText);
+		assert.strictEqual(TestXmlHttpRequest.parameters.json, '{"uid":1,"name":"Kurt Humbuk"}');
 	});
 
 	it('Should execute post request for type file', async function() {
@@ -109,15 +111,13 @@ describe('Rest', function() {
 		TestXmlHttpRequest.status = 200;
 		TestXmlHttpRequest.setResponseHeader('content-type','text');
 
-		let file = {'name': 'test', 'type':'application/text', 'blob':'test'};
-		let sample = await rest.postFiles('http://somehost/text', file);
-		assert.notEqual(sample, null);
-		assert.equal(sample, TestXmlHttpRequest.responseText);
-		assert.equal(TestXmlHttpRequest.parameters, file);
-	});
-
-	it('Should transform object to an encoded string', function() {
-		let o = {'uid':1,'name':'test'};
-		assert.equal(rest.encodeMap(o), 'uid=1&name=test');
+		let file = new FormData();
+		file.append('name', 'test');
+		file.append('type', 'application/text');
+		file.append('blob', 'test');
+		let sample = await rest.post('http://somehost/text', file);
+		assert.notStrictEqual(sample, null);
+		assert.strictEqual(sample, TestXmlHttpRequest.responseText);
+		assert.strictEqual(TestXmlHttpRequest.parameters, file);
 	});
 });

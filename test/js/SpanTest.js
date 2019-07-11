@@ -16,31 +16,30 @@ describe('Span', function() {
 
 	beforeEach(function() {
 		let browser = new TestBrowser();
-		let css = new ui.CssDelegate();
 		view = new TestView(browser.window, `<div data-class="MyClass"><span data-property="text"></span></div>`);
 		doc = browser.window.document;
 	});
 
 	it('Should contain a value on populate', function() {
 		// Initial should be empty
-		assert.equal(view.isVisible, false);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isVisible, false);
+		assert.strictEqual(view.isDirty, false);
+		assert.strictEqual(view.isValid, true);
 
 		view.show();
 		let span = doc.querySelector("span");
-		assert.notEqual(span, null);
-		assert.equal(span.innerHTML, '');
+		assert.notStrictEqual(span, null);
+		assert.strictEqual(span.innerHTML, '');
 
 		// Populate
 		object = new MyClass();
 		object.add(JSON.parse('{"MyClass":{"uid":1,"text":"load"}}'));
-		view.populate(MyClass.name, object.getAll().first());
+		view.populate(MyClass.name, object.get(1));
 
 		// Should contain value
-		assert.equal(view.isVisible, true);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
-		assert.equal(span.innerHTML, 'load');
+		assert.strictEqual(view.isVisible, true);
+		assert.strictEqual(view.isDirty, false);
+		assert.strictEqual(view.isValid, true);
+		assert.strictEqual(span.innerHTML, 'load');
 	});
 });
