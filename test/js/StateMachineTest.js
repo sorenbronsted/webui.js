@@ -54,17 +54,4 @@ describe('StateMachine', function() {
 			assert.strictEqual(event, null);
 		}
 	});
-
-	it('Should serialize events', function() {
-		sm.add(new mvc.Transition('start', 'start', function(e) {
-			called++;
-			if (called > 1) { // Prevent of going into infinite loop
-				return;
-			}
-			sm.run(new mvc.Event('me', 'test2'));
-			assert.strictEqual(called, 1);
-		}));
-		sm.run(new mvc.Event('me', 'test1'));
-		assert.strictEqual(called, 2);
-	});
 });

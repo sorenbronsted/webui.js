@@ -1,30 +1,28 @@
 const collect = require('collect.js');
 const mvc = require('../../lib/src/mvc');
-const TestStore = require('./utils/TestStore.js').TestStore;
-const TestObserver = require('./utils/TestObserver.js').TestObserver;
 const assert = require('assert');
 
 class MyClass extends mvc.BaseProxy {
 	constructor() {
 		super();
 		this.someProperty = null;
-		this._property = null;
+		this.otherProperty = null;
 	}
 
 	get properties() {
 		return {someProperty:this.someProperty};
 	}
 
-	set propertyByElement(element) {
-		this._property = element;
+	set somePropertyByElement(element) {
+		this.someProperty = element.value;
 	}
 }
 
 describe('BaseProxy', function() {
-	describe('#add', function() {
-		let serverResult;
-		let proxy;
+	let serverResult;
+	let proxy;
 
+	describe('#add', function() {
 		beforeEach(function() {
 			serverResult = JSON.parse('{"MyClass":{"uid":1,"name":"load"}}'); // Simulate server result
 			proxy = new MyClass();
@@ -54,9 +52,6 @@ describe('BaseProxy', function() {
 	});
 
 	describe('#addAll', function() {
-		let serverResult;
-		let proxy;
-
 		beforeEach(function() {
 			serverResult = collect(JSON.parse('[{"MyClass":{"uid":1,"name":"test1"}},{"MyClass":{"uid":2,"name":"test2"}}]')); // Simulate server result
 			proxy = new MyClass();
@@ -112,22 +107,18 @@ describe('BaseProxy', function() {
 			assert.strictEqual(proxy.someProperty, null);
 			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name,'someProperty', undefined, 'someValue'));
 			assert.strictEqual(proxy.someProperty, 'someValue');
-			assert.strictEqual(proxy.get(1), null);
+		});
+
+		it('Should set otherProperty via setPropertyByElement', function() {
+			assert.strictEqual(proxy.otherProperty, null);
+			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name,'otherProperty', undefined, 'someValue'));
+			assert.strictEqual(proxy.otherProperty, 'someValue');
 		});
 
 		it('Should set someProperty via setProperty', function() {
 			assert.strictEqual(proxy.someProperty, null);
 			proxy.setProperty('someProperty', 'someValue');
 			assert.strictEqual(proxy.someProperty, 'someValue');
-			assert.strictEqual(proxy.get(1), null);
-		});
-
-		it('Should set elementProperty', function() {
-			assert.strictEqual(proxy._property, null);
-			let elementValue = new mvc.ElementValue(MyClass.name,'property', undefined, 'someValue');
-			proxy.setPropertyByElement(elementValue);
-			assert.strictEqual(proxy._property, elementValue);
-			assert.strictEqual(proxy.get(1), null);
 		});
 
 		it('Should fail on property not found on object', function() {
@@ -149,6 +140,45 @@ describe('BaseProxy', function() {
 			assert.strictEqual(proxy.someProperty, 'someValue');
 			assert(proxy.properties, {someProperty:'someValue'});
 		});
+	});
+
+	describe('#get', function() {
+		beforeEach(function () {
+			proxy = new MyClass();
+		});
+
+		it('Should fail on object not found', function() {
+			assert.throws(() => { proxy.get(1) },/Object not found: 1/);
+		});
+
+	});
+
+	describe('#getAll', function() {
+		beforeEach(function () {
+			serverResult = collect(JSON.parse('[{"MyClass":{"uid":1,"name":"test1"}},{"MyClass":{"uid":2,"name":"test2"}}]')); // Simulate server result
+			proxy = new MyClass();
+		});
+
+		it('Should be sorted asc', function() {
+			let objects = proxy.getAll().objects;
+			let uid = 1;
+			objects.each(item => {
+				assert.strictEqual(itme.uid, uid);
+				uid++;
+			});
+		});
+
+
+		it('Should be sorted desc', function() {
+			proxy.sortAsc = false;
+			let objects = proxy.getAll().objects;
+			let uid = 2;
+			objects.each(item => {
+				assert.strictEqual(itme.uid, uid);
+				uid--;
+			});
+		});
+
 	});
 });
 

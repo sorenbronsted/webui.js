@@ -1,0 +1,6 @@
+TODO
+====
+
+Use instead of puppeteer because puppeteer has som timing issue, which I remember webdriver did not have :-)
+Adapt to current person app.
+Match chromium and driver and download from https://chromedriver.chromium.org/downloads

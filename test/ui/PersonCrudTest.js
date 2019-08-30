@@ -32,7 +32,6 @@ describe('Person CRUD', async () => {
 	});
 
 	it('Should create a new person', async function() {
-		this.timeout(30000);
 		let create = await page.waitForSelector('button[name=create]');
 		await create.click();
 

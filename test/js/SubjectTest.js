@@ -13,7 +13,7 @@ describe('Subject', function() {
 	});
 
 	// Should be added once
-	it('should return 1 when handled', function() {
+	it('Should return 1 when handled', function() {
 		subject.addEventListener(observer);
 		subject.addEventListener(observer);
 		subject.fire(new mvc.Event());
@@ -39,6 +39,11 @@ describe('Subject', function() {
 		subject.removeEventListener(observer);
 		subject.fire(new mvc.Event());
 		assert.strictEqual(observer.root, null);
+	});
+
+	it('Should serialize events', function() {
+		subject.addEventListener(observer);
+		subject.fire(new mvc.Event());
 	});
 });
 

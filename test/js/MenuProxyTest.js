@@ -1,9 +1,9 @@
 
 const assert = require('assert');
 const collect = require('collect.js');
-//const Subject = require('../../lib/src/mvc/Subject.js').Subject;
 const Observer = require('../../lib/src/mvc/Observer.js').Observer;
-const m = require('../../lib/src/menu');
+const MenuProxy = require('../../lib/src/menu/MenuProxy.js').MenuProxy;
+const Menu = require('../../lib/src/menu/Menu.js').Menu;
 
 class TestObserver extends Observer {
 	constructor(subject) {
@@ -17,14 +17,15 @@ class TestObserver extends Observer {
 	}
 }
 
-class TestProxy extends m.MenuProxy {
+class TestProxy extends MenuProxy {
 	_populate(root) {
-		let child = root.push(new m.Menu(2,'/params', 'p1'));
-		child.push(new m.Menu(4, '/child4'));
-		child.push(new m.Menu(5, '/child5'));
-		child = root.push(new m.Menu(3,'/uid-param', 'uid'));
-		child.push(new m.Menu(6, '/child6'));
-		child.push(new m.Menu(7, '/child7'));
+		let urlPattern = /\/[0-9]+/;
+		let child = root.push(new Menu(2,'/params', 'p1'));
+		child.push(new Menu(4, '/child4'));
+		child.push(new Menu(5, '/child5'));
+		child = root.push(new Menu(3,'/uid-param', 'uid'));
+		child.push(new Menu(6, '/child6'));
+		child.push(new Menu(7, '/child7'));
 	}
 }
 
@@ -42,7 +43,7 @@ describe('MenuProxy', function() {
 		collect(['', '/A?aa=117']).each(uri => {
 			proxy.setParameter(uri);
 			proxy.populate();
-			assert.ok(observer.root !=null);
+			assert.ok(observer.root != null);
 
 			let menu = observer.root.getByUid(2);
 			assert.strictEqual(menu.uri, '');
@@ -104,6 +105,6 @@ describe('MenuProxy', function() {
 
 describe('MenuProxy interface', () => {
 	it('Should error', () => {
-		assert.throws(() => new m.MenuProxy(), {message:/override/});
+		assert.throws(() => new MenuProxy(), {message:/override/});
 	});
 });

@@ -82,8 +82,7 @@ describe('CrudProxy', function() {
 		assert.strictEqual(observer.root.body.message,'Simulated error');
 		proxy.read(1);
 		assert.strictEqual(observer.root.body.message,'Simulated error');
-		proxy.update();
-		assert.strictEqual(observer.root.body.message,'Simulated error');
+		assert.throws(() => { proxy.update(1) },/Object not found: 1/);
 		proxy.delete();
 		assert.strictEqual(observer.root.body.message,'Simulated error');
 	});
