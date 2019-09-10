@@ -3,143 +3,98 @@ namespace ufds;
 
 require('test/settings.php');
 
-use Facebook\WebDriver\Chrome\ChromeDriver;
-use Facebook\WebDriver\Chrome\ChromeDriverService;
-use Facebook\WebDriver\Chrome\ChromeOptions;
-use Facebook\WebDriver\Remote\DesiredCapabilities;
-use Facebook\WebDriver\WebDriverBy;
-use Facebook\WebDriver\WebDriverExpectedCondition;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class DefaultTest extends PHPUnit_Framework_TestCase {
-	private static $driver;
+class PersonCrudTest extends TestCase {
+	private static $page;
 
-	public static function setUpBeforeClass() {
-		error_reporting(E_ALL & ~E_NOTICE);
-		putenv(ChromeDriverService::CHROME_DRIVER_EXE_PROPERTY."=/home/sb/tools/dartium/chromedriver");
-
-		$options = new ChromeOptions();
-		$options->setBinary('/home/sb/tools/dartium/chrome');
-		$options->addArguments([
-			'--window-size=571,428',
-		]);
-		$capabilities = DesiredCapabilities::chrome();
-		$capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
-
-		self::$driver = ChromeDriver::start($capabilities, ChromeDriverService::createDefaultService());
+	public static function setUpBeforeClass() : void {
+		self::$page = new Page();
 	}
 
-	public static function tearDownAfterClass() {
-		self::$driver->quit();
+	public static function tearDownAfterClass() : void {
+		self::$page->quit();
 	}
 
-	protected function setUp() {
-		self::$driver->get('http://localhost:8080');
-		Db::exec(Person::$db, 'delete from person');
+	protected function setUp() :void {
+		TestHelper::clean();
 	}
 
 	public function testNew() {
-		$this->assertEquals('WebUi Sample', self::$driver->getTitle());
+		self::$page->goto('http://localhost:8080');
 
 		// Change view
-		self::$driver->wait()->until(
-			WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::id('PersonList'))
-		);
+		self::$page->waitForSelector('button[name="create"]');
 
 		// assert that table is empty
-		$elements = self::$driver->findElements(WebDriverBy::cssSelector('table tr'));
-		$this->assertEquals(1, count($elements));
+		$element = self::$page->getElement('table > tbody > tr > td');
+		$this->assertEquals('Ingen data fundet', $element->getText());
 
 		// Click on New
-		self::$driver->findElement(WebDriverBy::cssSelector('button[name=create]'))->click();
+		self::$page->click('button[name=create]');
 
 		// Change view
-		self::$driver->wait()->until(
-			WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::id('PersonDetail'))
-		);
+		self::$page->waitForSelector('button[name="save"]');
 
 		// Find input and a text
-		self::$driver->findElement(WebDriverBy::cssSelector('input[data-property="name"]'))->click();
-		self::$driver->getKeyboard()->sendKeys('Kurt Humbuk');
-
-		self::$driver->findElement(WebDriverBy::cssSelector('input[data-property="address"]'))->click();
-		self::$driver->getKeyboard()->sendKeys('Svindelvej 1');
-
-		self::$driver->findElement(WebDriverBy::cssSelector('input[data-property="zipcode"]'))->click();
-		self::$driver->getKeyboard()->sendKeys('2500');
-
-		self::$driver->findElement(WebDriverBy::cssSelector('input[data-property="town"]'))->click();
-		self::$driver->getKeyboard()->sendKeys('Valby');
-
-		self::$driver->findElement(WebDriverBy::cssSelector('button[name=save]'))->click();
+		self::$page->type('input[data-property="name"]', 'Kurt Humbuk');
+		self::$page->type('input[data-property="address"]', 'Svindelvej 1');
+		self::$page->type('input[data-property="zipcode"]', '2500');
+		self::$page->type('input[data-property="town"]', 'Valby');
+		self::$page->click('button[name=save]');
 
 		// Change view
-		self::$driver->wait()->until(
-			WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::id('PersonList'))
-		);
-		$elements = self::$driver->findElements(WebDriverBy::cssSelector('table tr'));
-		$this->assertEquals(2, count($elements));
+		self::$page->waitForSelector('button[name="create"]');
+
+		$element = self::$page->getElement('table > tbody > tr > td:nth-child(2) > a');
+		$this->assertEquals('Kurt Humbuk', $element->getText());
 	}
 
 	public function testChangeSave() {
-		Db::exec(Person::$db, 'insert into person(uid,name) values(1, "sletmig")');
+		$person = Fixture::getPerson();
+		$person->name = 'sletmig';
+		$person->save();
 
-		$this->assertEquals('WebUi Sample', self::$driver->getTitle());
-		// Change view
-		self::$driver->wait()->until(
-			WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::id('PersonList'))
-		);
+		self::$page->goto('http://localhost:8080');
+		self::$page->waitForSelector('button[name="create"]');
 
-		// assert that table is empty
-		$elements = self::$driver->findElements(WebDriverBy::cssSelector('table tr'));
-		$this->assertEquals(2, count($elements));
+		// assert that table is not empty
+		$element = self::$page->getElement('table > tbody > tr > td:nth-child(2) > a');
+		$this->assertEquals('sletmig', $element->getText());
 
 		// Click on name
-		self::$driver->findElement(WebDriverBy::cssSelector('a[href="/#detail/Person/1"]'))->click();
+		$element->click();
 
 		// Change view
-		self::$driver->wait()->until(
-			WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::id('PersonDetail'))
-		);
+		self::$page->waitForSelector('button[name="save"]');
 
 		// Find input and a text
-		self::$driver->findElement(WebDriverBy::cssSelector('input[data-property="name"]'))->click()->clear();
-		self::$driver->getKeyboard()->sendKeys('Yrsa Humbuk');
+		self::$page->type('input[data-property="name"]', 'Yrsa Humbuk');
 
-		self::$driver->findElement(WebDriverBy::cssSelector('button[name=save]'))->click();
+		self::$page->click('button[name=save]');
 
 		// Change view
-		self::$driver->wait()->until(
-			WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::id('PersonList'))
-		);
-		$elements = self::$driver->findElements(WebDriverBy::cssSelector('table tr'));
-		$this->assertEquals(2, count($elements));
+		self::$page->waitForSelector('button[name="create"]');
+		$element = self::$page->getElement('table > tbody > tr > td:nth-child(2) > a');
+		$this->assertEquals('Yrsa Humbuk', $element->getText());
 	}
 
 	public function testDelete() {
-		Db::exec(Person::$db, 'insert into person(uid,name) values(1, "sletmig")');
+		$person = Fixture::getPerson();
+		$person->name = 'sletmig';
+		$person->save();
 
-		$this->assertEquals('WebUi Sample', self::$driver->getTitle());
-
-		// Change view
-		self::$driver->wait()->until(
-			WebDriverExpectedCondition::presenceOfElementLocated(WebDriverBy::id('PersonList'))
-		);
+		self::$page->goto('http://localhost:8080');
+		self::$page->waitForSelector('button[name="create"]');
 
 		// Find delete link
-		self::$driver->findElement(WebDriverBy::cssSelector('a[href="/#Person/1"]'))->click();
-		$alert = self::$driver->wait()->until(WebDriverExpectedCondition::alertIsPresent());
+		self::$page->click('table > tbody > tr > td:nth-child(1) > a');
+		$alert = self::$page->getAlert();
 		$alert->accept();
 
 		// Wait for rest call to complete
-		self::$driver->wait()->until(
-			function ($driver) {
-				return $driver->findElement(WebDriverBy::tagName('body'))->getCSSValue('cursor') == 'auto';
-			}
-		);
+		self::$page->waitForText('table > tbody > tr > td', 'Ingen data fundet');
 
-		// Now we back to square one
-		$elements = self::$driver->findElements(WebDriverBy::cssSelector('table tr'));
-		$this->assertEquals(1, count($elements));
+		$this->assertTrue(true);
 	}
 }

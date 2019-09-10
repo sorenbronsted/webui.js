@@ -19,11 +19,10 @@ class TestObserver extends Observer {
 
 class TestProxy extends MenuProxy {
 	_populate(root) {
-		let urlPattern = /\/[0-9]+/;
 		let child = root.push(new Menu(2,'/params', 'p1'));
 		child.push(new Menu(4, '/child4'));
 		child.push(new Menu(5, '/child5'));
-		child = root.push(new Menu(3,'/uid-param', 'uid'));
+		child = root.push(new Menu(3,'/detail/SomeProxy', 'uid'));
 		child.push(new Menu(6, '/child6'));
 		child.push(new Menu(7, '/child7'));
 	}
@@ -54,7 +53,7 @@ describe('MenuProxy', function() {
 	});
 
 	it('Should set the parameters', () => {
-		proxy.setParameter('/list/SomeClass/1?p1=117');
+		proxy.setParameter('/list/SomeProxy/1?p1=117');
 		proxy.populate();
 		assert.ok(observer.root !=null);
 
@@ -62,7 +61,7 @@ describe('MenuProxy', function() {
 		assert.strictEqual(menu.uri, '/params?p1=117');
 
 		menu = observer.root.getByUid(3);
-		assert.strictEqual(menu.uri, '/uid-param/1');
+		assert.strictEqual(menu.uri, '/detail/SomeProxy/1');
 	});
 
 	it('Should select a menu', () => {
@@ -74,16 +73,19 @@ describe('MenuProxy', function() {
 
 		collect([2,4,5]).each(uid => {
 			let menu = observer.root.getByUid(uid);
-			if (uid !== 5) {
-				assert.strictEqual(menu.active, true, `${uid}`);
+			if (uid === 5) {
+				assert.strictEqual(menu.selected, false, uid);
 			}
-			assert.strictEqual(menu.visible, true, `${uid}`);
+			else {
+				assert.strictEqual(menu.selected, true, uid);
+			}
+			assert.strictEqual(menu.visible, true, uid);
 		});
 
 		collect([3,6,7]).each(uid => {
 			let menu = observer.root.getByUid(uid);
-			assert.strictEqual(menu.active, false, `${uid}`);
-			assert.strictEqual(menu.visible, false, `${uid}`);
+			assert.strictEqual(menu.selected, false, uid);
+			assert.strictEqual(menu.visible, false, uid);
 		});
 	});
 
@@ -96,8 +98,8 @@ describe('MenuProxy', function() {
 
 		collect([3,4,5,6,7]).each(uid => {
 			let menu = observer.root.getByUid(uid);
-			assert.strictEqual(menu.active, false, `${uid}`);
-			assert.strictEqual(menu.visible, false, `${uid}`);
+			assert.strictEqual(menu.selected, false, uid);
+			assert.strictEqual(menu.visible, false, uid);
 		});
 	});
 

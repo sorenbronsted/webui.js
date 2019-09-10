@@ -9,6 +9,6 @@ class TestHelper {
 	}
 
 	public static function clean() {
-		Db::exec(DbObject::$db, 'delete from person');
+		Db::exec(DbObject::$db, 'truncate person');
 	}
 }

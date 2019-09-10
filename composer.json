@@ -19,7 +19,8 @@
     "ufds/libtypes": "dev-master",
     "ufds/libcommon": "dev-master",
     "ufds/librest": "dev-master",
-    "ufds/libutil": "dev-master"
+    "ufds/libutil": "dev-master",
+    "facebook/webdriver": "^1.7"
   },
   
   "repositories": [
