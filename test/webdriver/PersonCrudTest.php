@@ -48,6 +48,7 @@ class PersonCrudTest extends TestCase {
 
 		$element = self::$page->getElement('table > tbody > tr > td:nth-child(2) > a');
 		$this->assertEquals('Kurt Humbuk', $element->getText());
+		$this->assertStringContainsString('/detail/Person/1', $element->getAttribute('href'));
 	}
 
 	public function testChangeSave() {
