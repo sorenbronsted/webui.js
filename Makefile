@@ -14,4 +14,4 @@ bundle:
 	npm run bundle
 
 install:
-	npm install
+	npm ci
