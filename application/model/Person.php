@@ -14,6 +14,13 @@ class Person extends ModelObject {
 
 	private static $mandatories = ['name', 'address', 'zipcode', 'town'];
 
+	public function save() {
+		if (is_null($this->gender)) {
+			$this->gender = 2;
+		}
+		parent::save();
+	}
+
 	protected function getProperties() {
 		return self::$properties;
 	}

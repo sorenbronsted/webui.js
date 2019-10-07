@@ -33,15 +33,17 @@ describe('Select', function() {
 		let select = doc.querySelector("select");
 		assert.strictEqual(select.value, '');
 		assert.strictEqual(select.length, 0);
+		assert.strictEqual(select.selectedIndex, -1);
 
 		// Populate
 		let object = new MyClass();
-		object.add(JSON.parse('{"MyClass":{"uid":1,"value_uid":1}}'));
+		object.add(JSON.parse('{"MyClass":{"uid":1,"value_uid":2}}'));
 		let values = new MyValue();
 		values.addAll(collect(JSON.parse('[{"MyValue":{"uid":1,"text":"load 1"}},{"MyValue":{"uid":2,"text":"load 2"}}]')));
 
-		view.populate(MyClass.name, object.get(1));
+		// The order of populate will ensure that select gets the proper value
 		view.populate(MyValue.name, values.getAll());
+		view.populate(MyClass.name, object.get(1));
 
 		// Should contain value
 		assert.strictEqual(view.isVisible, true);
@@ -49,42 +51,7 @@ describe('Select', function() {
 		assert.strictEqual(view.isValid, true);
 
 		assert.strictEqual(select.length, 2);
-		assert.strictEqual(select.value, '1');
-	});
-
-	it('Should trigger an event on populate because it has no value', function() {
-		// Initial should be empty
-		assert.strictEqual(view.isVisible, false);
-		assert.strictEqual(view.isDirty, false);
-		assert.strictEqual(view.isValid, true);
-
-		view.show();
-		let select = doc.querySelector("select");
-		assert.strictEqual(select.value, '');
-		assert.strictEqual(select.length, 0);
-
-		// Populate
-		let object = new MyClass();
-		object.add(JSON.parse('{"MyClass":{"uid":1}}'));
-		let values = new MyValue();
-		values.addAll(collect(JSON.parse('[{"MyValue":{"uid":1,"text":"load 1"}},{"MyValue":{"uid":2,"text":"load 2"}}]')));
-
-		view.populate(MyClass.name, object.get(1));
-		view.populate(MyValue.name, values.getAll());
-
-		// Should contain value
-		assert.strictEqual(view.isVisible, true);
-		assert.strictEqual(view.isDirty, false);
-		assert.strictEqual(view.isValid, true);
-
-		assert.strictEqual(select.length, 2);
-		assert.strictEqual(select.value, '1');
-
-		// Because value on select is not set, the select element will automatic select first option and fire an event for that
-		assert.strictEqual(view.eventName, view.eventPropertyChanged);
-		assert.strictEqual(view.body.property, 'value_uid');
-		assert.strictEqual(view.body.value, select.value);
-
+		assert.strictEqual(select.value, '2');
 	});
 
 	it('Should have a datalist', function() {
