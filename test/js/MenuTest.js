@@ -8,7 +8,7 @@ describe('Menu', function() {
 	let root;
 
 	/* Menu structure
-	1
+	0 (root)
 	+--+--+
 	2  3  4
 	      +--+
@@ -109,12 +109,12 @@ describe('Menu', function() {
 
 		let menu = root.getByUid(4);
 		assert.strictEqual(menu.selected, false);
-		assert.strictEqual(menu.visible, false);
+		assert.strictEqual(menu.visible, true);
 
 		collect([5,6]).each(uid => {
 			let child = root.getByUid(uid);
-			assert.strictEqual(menu.selected, false);
-			assert.strictEqual(menu.visible, false);
+			assert.strictEqual(child.selected, false);
+			assert.strictEqual(child.visible, false);
 		});
 	});
 

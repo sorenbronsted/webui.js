@@ -85,7 +85,12 @@ describe('MenuProxy', function() {
 		collect([3,6,7]).each(uid => {
 			let menu = observer.root.getByUid(uid);
 			assert.strictEqual(menu.selected, false, uid);
-			assert.strictEqual(menu.visible, false, uid);
+			if (uid === 3) {
+				assert.strictEqual(menu.visible, true, uid);
+			}
+			else {
+				assert.strictEqual(menu.visible, false, uid);
+			}
 		});
 	});
 
