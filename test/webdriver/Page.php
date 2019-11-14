@@ -1,10 +1,12 @@
 <?php
 namespace ufds;
 
+use Exception;
 use Facebook\WebDriver\Chrome\ChromeDriver;
 use Facebook\WebDriver\Chrome\ChromeDriverService;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Facebook\WebDriver\WebDriverAlert;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
 use Facebook\WebDriver\WebDriverExpectedCondition;
@@ -75,5 +77,21 @@ class Page {
 
 	public function getAlert() {
 		return $this->driver->wait()->until(WebDriverExpectedCondition::alertIsPresent());
+	}
+
+	public function getUrl() : string {
+		return $this->driver->getCurrentURL();
+	}
+
+	public function getActiveDialog() : ?WebDriverAlert {
+		try {
+			$dialog = $this->driver->switchTo()->alert();
+			// This will actually talk to the browser and verify if we an dialog open
+			$dialog->getText();
+			return $dialog;
+		}
+		catch (Exception $e) {
+			return null;
+		}
 	}
 }
