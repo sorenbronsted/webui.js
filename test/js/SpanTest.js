@@ -6,7 +6,12 @@ const ui = require('../../lib/src/ui');
 const TestView = require('./utils/TestView').TestView;
 const TestBrowser = require('./utils/TestBrowser').TestBrowser;
 
-class MyClass extends mvc.BaseProxy {}
+class MyClass extends mvc.BaseProxy {
+	constructor() {
+		super();
+		super.add(JSON.parse('{"MyClass":{"uid":1,"text":"load"}}'));
+	}
+}
 
 describe('Span', function() {
 
@@ -33,7 +38,6 @@ describe('Span', function() {
 
 		// Populate
 		object = new MyClass();
-		object.add(JSON.parse('{"MyClass":{"uid":1,"text":"load"}}'));
 		view.populate(MyClass.name, object.get(1));
 
 		// Should contain value
@@ -41,5 +45,19 @@ describe('Span', function() {
 		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 		assert.strictEqual(span.innerHTML, 'load');
+	});
+
+	it('Should not change when populated with empty data', function() {
+		view.show();
+		object = new MyClass();
+		view.populate(MyClass.name, object.get(1));
+
+		let span = doc.querySelector("span");
+
+		view.populate(MyClass.name, null);
+		assert.strictEqual(span.textContent, 'load');
+
+		view.populate(MyClass.name, '');
+		assert.strictEqual(span.textContent, 'load');
 	});
 });

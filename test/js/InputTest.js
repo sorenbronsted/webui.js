@@ -66,6 +66,19 @@ describe('Input', function() {
 		assert.strictEqual(female.checked, true);
 	});
 
+	it('Should not change when populated with empty data', function() {
+		view.show();
+		let input = doc.querySelector("input[data-property=text]");
+		input.value = '1';
+		assert.strictEqual(input.value, '1');
+
+		view.populate(MyClass.name, null);
+		assert.strictEqual(input.value, '1');
+
+		view.populate(MyClass.name, '');
+		assert.strictEqual(input.value, '1');
+	});
+
 	it('Should be valid on focus', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");

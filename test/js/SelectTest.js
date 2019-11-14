@@ -7,9 +7,19 @@ const ui = require('../../lib/src/ui');
 const TestView = require('./utils/TestView').TestView;
 const TestBrowser = require('./utils/TestBrowser').TestBrowser;
 
-class MyClass extends mvc.BaseProxy {}
+class MyClass extends mvc.BaseProxy {
+	constructor() {
+		super();
+		super.add(JSON.parse('{"MyClass":{"uid":1,"value_uid":2}}'));
+	}
+}
 
-class MyValue extends mvc.BaseProxy {}
+class MyList extends mvc.BaseProxy {
+	constructor() {
+		super();
+		super.addAll(collect(JSON.parse('[{"MyList":{"uid":1,"text":"load 1"}},{"MyList":{"uid":2,"text":"load 2"}}]')));
+	}
+}
 
 describe('Select', function() {
 
@@ -19,7 +29,7 @@ describe('Select', function() {
 	beforeEach(function() {
 		let browser = new TestBrowser();
 		view = new TestView(browser.window,
-			`<div data-class="MyClass"><select data-property="value_uid" data-list="MyValue" data-list-display="text"></select></div>`);
+			`<div data-class="MyClass"><select data-property="value_uid" data-list="MyList" data-list-display="text"></select></div>`);
 		doc = browser.window.document;
 	});
 
@@ -37,12 +47,10 @@ describe('Select', function() {
 
 		// Populate
 		let object = new MyClass();
-		object.add(JSON.parse('{"MyClass":{"uid":1,"value_uid":2}}'));
-		let values = new MyValue();
-		values.addAll(collect(JSON.parse('[{"MyValue":{"uid":1,"text":"load 1"}},{"MyValue":{"uid":2,"text":"load 2"}}]')));
+		let list = new MyList();
 
 		// The order of populate will ensure that select gets the proper value
-		view.populate(MyValue.name, values.getAll());
+		view.populate(MyList.name, list.getAll());
 		view.populate(MyClass.name, object.get(1));
 
 		// Should contain value
@@ -54,11 +62,29 @@ describe('Select', function() {
 		assert.strictEqual(select.value, '2');
 	});
 
+	it('Should not change when populated with empty data', function() {
+		view.show();
+
+		let object = new MyClass();
+		let list = new MyList();
+		view.populate(MyList.name, list.getAll());
+		view.populate(MyClass.name, object.get(1));
+
+		let select = doc.querySelector("select");
+		assert.strictEqual(select.value, '2');
+
+		view.populate(MyClass.name, null);
+		assert.strictEqual(select.value, '2');
+
+		view.populate(MyClass.name, '');
+		assert.strictEqual(select.value, '2');
+	});
+
 	it('Should have a datalist', function() {
 		let list = view.dataLists;
 		assert.notStrictEqual(list, null);
 		assert.strictEqual(list.count(), 1);
-		assert.strictEqual(list.first(), MyValue.name);
+		assert.strictEqual(list.first(), MyList.name);
 	});
 
 	it('Should be valid on focus', function() {

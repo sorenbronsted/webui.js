@@ -6,7 +6,12 @@ const ui = require('../../lib/src/ui');
 const TestView = require('./utils/TestView').TestView;
 const TestBrowser = require('./utils/TestBrowser').TestBrowser;
 
-class MyClass extends mvc.BaseProxy {}
+class MyClass extends mvc.BaseProxy {
+	constructor() {
+		super();
+		super.add(JSON.parse('{"MyClass":{"uid":1,"text":"load", "checkbox":"1", "gender":"female"}}'));
+	}
+}
 
 describe('TextArea', function() {
 
@@ -16,7 +21,6 @@ describe('TextArea', function() {
 
 	beforeEach(function() {
 		object = new MyClass();
-		object.add(JSON.parse('{"MyClass":{"uid":1,"text":"load", "checkbox":"1", "gender":"female"}}'));
 
 		let browser = new TestBrowser();
 			view = new TestView(browser.window, `<div data-class="MyClass"><textarea data-property="text"></textarea></div>`
@@ -42,6 +46,19 @@ describe('TextArea', function() {
 		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 		assert.strictEqual(text.value, 'load');
+	});
+
+	it('Should not change when populated with empty data', function() {
+		view.show();
+		let input = doc.querySelector("textarea[data-property=text]");
+		input.value = '1';
+		assert.strictEqual(input.value, '1');
+
+		view.populate(MyClass.name, null);
+		assert.strictEqual(input.value, '1');
+
+		view.populate(MyClass.name, '');
+		assert.strictEqual(input.value, '1');
 	});
 
 	it('Should be valid on focus', function() {

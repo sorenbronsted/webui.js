@@ -93,5 +93,12 @@ describe('Table', function() {
 		let colspan = cells[0].attributes.getNamedItem('colspan');
 		assert.notStrictEqual(colspan, null);
 		assert.strictEqual(parseInt(colspan.value), table.getElementsByTagName('th').length);
+
+		// Populate with empty value should change anything
+		view.populate(MyClass.name, {objects: null});
+		assert.strictEqual(table.tBodies.length, 1);
+
+		view.populate(MyClass.name, {objects: ''});
+		assert.strictEqual(table.tBodies.length, 1);
 	});
 });
