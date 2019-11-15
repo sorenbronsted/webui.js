@@ -41,6 +41,7 @@ class PersonCrudTest extends TestCase {
 		self::$page->type('input[data-property="address"]', 'Svindelvej 1');
 		self::$page->type('input[data-property="zipcode"]', '2500');
 		self::$page->type('input[data-property="town"]', 'Valby');
+		self::$page->type('input[data-property="pet"]', 'Hund');
 		self::$page->click('button[name=save]');
 
 		// Change view

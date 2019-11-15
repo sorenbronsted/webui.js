@@ -21,6 +21,7 @@ class PersonApp extends mvc.App {
 		repo.add(router);
 		repo.add(new app.Person(store));
 		repo.add(new app.Gender(store));
+		repo.add(new app.Pet(store));
 		repo.add(new mvc.CurrentViewState());
 
 		// Load views and add controllers
