@@ -28,7 +28,6 @@
   "devDependencies": {
     "jsdom": "12.2.0",
     "jsdom-global": "3.0.2",
-    "keysim": "^2.1.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",
     "webpack": "^4.41.2",

@@ -1,7 +1,6 @@
 const {JSDOM} = require("jsdom");
 const assert = require('assert');
 const collect = require('collect.js');
-const keysim = require('keysim');
 const mvc = require('../../lib/src/mvc');
 const ui = require('../../lib/src/ui');
 const TestView = require('./utils/TestView').TestView;
