@@ -35,7 +35,6 @@ describe('Input', function() {
 	it('Should contain a value on populate', function() {
 		// Initial should be empty
 		assert.strictEqual(view.isVisible, false);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 
 		// Make visible
@@ -57,7 +56,6 @@ describe('Input', function() {
 
 		// Should contain value
 		assert.strictEqual(view.isVisible, true);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 		assert.strictEqual(text.value, 'load');
 		assert.strictEqual(file.value, '');
@@ -82,8 +80,6 @@ describe('Input', function() {
 	it('Should be valid on focus', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");
-		view.isValid = false;
-		assert.strictEqual(view.isValid, false);
 		elem.focus();
 		assert.strictEqual(view.isValid, true);
 	});
@@ -91,53 +87,62 @@ describe('Input', function() {
 	it('Should be dirty on keypress', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");
-		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('keypress', false, true);
 		elem.dispatchEvent(e);
-		assert.strictEqual(view.isDirty, true);
+		assert.strictEqual(view.events.count(), 1);
+		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
+		assert.strictEqual(view.events.get(0).body.property, 'isDirty');
+		assert.strictEqual(view.events.get(0).body.value, true);
 	});
 
 	it('Should be dirty on text change', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=text]");
-		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.strictEqual(view.isDirty, true);
+		assert.strictEqual(view.events.count(), 1);
+		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
+		assert.strictEqual(view.events.get(0).body.property, 'isDirty');
+		assert.strictEqual(view.events.get(0).body.value, true);
 	});
 
 	it('Should be dirty on file change', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=file]");
-		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.strictEqual(view.isDirty, true);
+		assert.strictEqual(view.events.count(), 2);
+		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
+		assert.strictEqual(view.events.get(0).body.property, 'isDirty');
+		assert.strictEqual(view.events.get(0).body.value, true);
+		assert.strictEqual(view.events.get(1).name, view.eventPropertyChanged);
+		assert.strictEqual(view.events.get(1).body.property, 'file');
+		assert.notStrictEqual(view.events.get(1).body.value, null);
 	});
 
 	it('Should be dirty on checkbox change', function() {
 		view.show();
 		let elem = doc.querySelector("input[data-property=checkbox]");
-		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.strictEqual(view.isDirty, true);
-		assert.strictEqual(view.body.value, 0); // because it is not checked
+		assert.strictEqual(view.events.count(), 2);
+		assert.strictEqual(view.events.get(0).body.value, true);
+		assert.strictEqual(view.events.get(1).body.value, 0); // because it is not checked
 	});
 
 	it('Should be dirty on radio change', function() {
 		view.show();
 		let elem = doc.querySelector("#male");
-		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.strictEqual(view.isDirty, true);
-		assert.strictEqual(view.body.value, 'male');
+		assert.strictEqual(view.events.count(), 2);
+		assert.strictEqual(view.events.get(0).body.value, true);
+		assert.strictEqual(view.events.get(1).body.value, 'male'); // because it is not checked
 	});
 
 	it('Should fire event on blur for type text', function() {
@@ -146,7 +151,8 @@ describe('Input', function() {
 		elem.value = 'test';
 		elem.focus();
 		elem.blur();
-		assert.strictEqual(view.eventName, view.eventPropertyChanged);
+		assert.strictEqual(view.events.count(), 1);
+		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
 	});
 
 	it('Should fire event on key enter', function() {
@@ -156,6 +162,7 @@ describe('Input', function() {
 		e.initEvent('keydown', false, true);
 		e.keyCode = 13;
 		elem.dispatchEvent(e);
-		assert.strictEqual(view.eventName, view.eventPropertyChanged);
+		assert.strictEqual(view.events.count(), 1);
+		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
 	});
 });

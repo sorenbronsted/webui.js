@@ -41,7 +41,6 @@ describe('Datalist', function() {
 	it('Should contain a value on populate', function() {
 		// Initial should be empty
 		assert.strictEqual(view.isVisible, false);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 
 		view.show();
@@ -52,7 +51,6 @@ describe('Datalist', function() {
 
 		// Should contain value
 		assert.strictEqual(view.isVisible, true);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 		let options = doc.querySelectorAll("datalist > option");
 		assert.strictEqual(options.length, 2);

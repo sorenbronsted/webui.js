@@ -28,7 +28,6 @@ describe('Span', function() {
 	it('Should contain a value on populate', function() {
 		// Initial should be empty
 		assert.strictEqual(view.isVisible, false);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 
 		view.show();
@@ -42,7 +41,6 @@ describe('Span', function() {
 
 		// Should contain value
 		assert.strictEqual(view.isVisible, true);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 		assert.strictEqual(span.innerHTML, 'load');
 	});

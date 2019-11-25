@@ -36,7 +36,6 @@ describe('Select', function() {
 	it('Should contain a value on populate', function() {
 		// Initial should be empty
 		assert.strictEqual(view.isVisible, false);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 
 		view.show();
@@ -55,7 +54,6 @@ describe('Select', function() {
 
 		// Should contain value
 		assert.strictEqual(view.isVisible, true);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 
 		assert.strictEqual(select.length, 2);
@@ -88,9 +86,6 @@ describe('Select', function() {
 	});
 
 	it('Should be valid on focus', function() {
-		view.isValid = false;
-		assert.strictEqual(view.isValid, false);
-
 		view.show();
 		let elem = doc.querySelector("select");
 		elem.focus();
@@ -98,13 +93,15 @@ describe('Select', function() {
 	});
 
 	it('Should be dirty on change', function() {
-		assert.strictEqual(view.isDirty, false);
 		view.show();
 		let elem = doc.querySelector("select");
 		let e = doc.createEvent('HTMLEvents');
 		e.initEvent('change', false, true);
 		elem.dispatchEvent(e);
-		assert.strictEqual(view.isDirty, true);
-		assert.strictEqual(view.eventName, view.eventPropertyChanged);
+		assert.strictEqual(view.events.count(), 2);
+		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
+		assert.strictEqual(view.events.get(0).body.property, 'isDirty');
+		assert.strictEqual(view.events.get(0).body.value, true);
+		assert.strictEqual(view.events.get(1).name, view.eventPropertyChanged);
 	});
 });

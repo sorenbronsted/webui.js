@@ -1,7 +1,7 @@
 
 const PersonApp = require('./PersonApp.js').PersonApp;
 
-window.onerror = () => {
+window.onerror = (error) => {
 	window.alert(error);
 };
 let app = new PersonApp(XMLHttpRequest, FormData, window);

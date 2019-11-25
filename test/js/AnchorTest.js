@@ -23,7 +23,6 @@ describe('Anchor', function() {
 
 	it('Should populate', function() {
 		assert.strictEqual(view.isVisible, true);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 		let elem = browser.window.document.querySelector("a");
 		assert.notStrictEqual(elem, null);
@@ -33,15 +32,14 @@ describe('Anchor', function() {
 
 	it('Should validateAndfire', function() {
 		assert.strictEqual(view.isVisible, true);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 		let elem = browser.window.document.querySelector("a");
 		elem.click();
-		assert.strictEqual(view.eventName, view.eventClick);
-		assert.strictEqual(view.isValidRequired, true);
-		assert.strictEqual(view.body.cls, mvc.BaseProxy.name);
-		assert.strictEqual(view.body.property, 'name');
-		assert.strictEqual(view.body.uid, 1);
-		assert.strictEqual(view.body.value, `${browser.location}load`);
+		assert.strictEqual(view.events.count(), 1);
+		assert.strictEqual(view.events.get(0).name, view.eventClick);
+		assert.strictEqual(view.events.get(0).body.cls, mvc.BaseProxy.name);
+		assert.strictEqual(view.events.get(0).body.property, 'name');
+		assert.strictEqual(view.events.get(0).body.uid, 1);
+		assert.strictEqual(view.events.get(0).body.value, `${browser.location}load`);
 	});
 });

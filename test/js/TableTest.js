@@ -62,11 +62,11 @@ describe('Table', function() {
 		// load links
 		for(let link of links) {
 			link.click();
-			assert.notStrictEqual(view.eventName, null);
-			assert.notStrictEqual(view.body.cls, null);
-			assert.notStrictEqual(view.body.property, null);
-			assert.notStrictEqual(view.body.uid, null);
-			assert.notStrictEqual(view.body.value, null);
+			assert.notStrictEqual(view.events.get(0).name, null);
+			assert.notStrictEqual(view.events.get(0).body.cls, null);
+			assert.notStrictEqual(view.events.get(0).body.property, null);
+			assert.notStrictEqual(view.events.get(0).body.uid, null);
+			assert.notStrictEqual(view.events.get(0).body.value, null);
 		}
 
 		// load callbacks

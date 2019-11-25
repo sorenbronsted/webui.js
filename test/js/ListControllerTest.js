@@ -44,6 +44,7 @@ describe('ListController', function() {
 		relatedView.classes.put(RelatedProxy.name, RelatedProxy.name);
 		router = new mvc.Router(view.window);
 		repo = new mvc.Repo();
+		repo.add(new mvc.CurrentViewState());
 		repo.add(new TestProxy(store));
 		repo.add(new RelatedProxy(store));
 		repo.add(router);

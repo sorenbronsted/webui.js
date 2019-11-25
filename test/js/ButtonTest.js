@@ -1,7 +1,6 @@
 
 const assert = require('assert');
 const mvc = require('../../lib/src/mvc');
-const ui = require('../../lib/src/ui');
 const TestBrowser = require('./utils/TestBrowser.js').TestBrowser;
 const TestView = require('./utils/TestView.js').TestView;
 
@@ -25,16 +24,15 @@ describe('Button', function() {
 	});
 
 	it('button.validateAndfire', function() {
-		assert.equal(view.isVisible, true);
-		assert.equal(view.isDirty, false);
-		assert.equal(view.isValid, true);
+		assert.strictEqual(view.isVisible, true);
+		assert.strictEqual(view.isValid, true);
 		let elem = browser.window.document.querySelector("button");
 		elem.click();
-		assert.equal(view.eventName, 'save');
-		assert.equal(view.isValidRequired, false);
-		assert.equal(view.body.cls, MyClass.name);
-		assert.equal(view.body.property, 'save');
-		assert.equal(view.body.uid, '1');
-		assert.equal(view.body.value, null);
+		assert.strictEqual(view.events.count(), 1);
+		assert.strictEqual(view.events.get(0).name, 'save');
+		assert.strictEqual(view.events.get(0).body.cls, MyClass.name);
+		assert.strictEqual(view.events.get(0).body.property, 'save');
+		assert.strictEqual(view.events.get(0).body.uid, 1);
+		assert.ok(view.events.get(0).body.value == null);
 	});
 });

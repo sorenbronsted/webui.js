@@ -31,7 +31,6 @@ describe('TextArea', function() {
 	it('Should contain a value on populate', function() {
 		// Initial should be empty
 		assert.strictEqual(view.isVisible, false);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 
 		view.show();
@@ -43,7 +42,6 @@ describe('TextArea', function() {
 
 		// Should contain value
 		assert.strictEqual(view.isVisible, true);
-		assert.strictEqual(view.isDirty, false);
 		assert.strictEqual(view.isValid, true);
 		assert.strictEqual(text.value, 'load');
 	});
@@ -62,9 +60,6 @@ describe('TextArea', function() {
 	});
 
 	it('Should be valid on focus', function() {
-		view.isValid = false;
-		assert.strictEqual(view.isValid, false);
-
 		view.show();
 		let elem = doc.querySelector("textarea[data-property=text]");
 		elem.focus();
@@ -74,11 +69,13 @@ describe('TextArea', function() {
 	it('Should be dirty on keypress', function() {
 		view.show();
 		let elem = doc.querySelector("textarea[data-property=text]");
-		assert.strictEqual(view.isDirty, false);
 		var e = doc.createEvent('HTMLEvents');
 		e.initEvent('keypress', false, true);
 		elem.dispatchEvent(e);
-		assert.strictEqual(view.isDirty, true);
+		assert.strictEqual(view.events.count(), 1);
+		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
+		assert.strictEqual(view.events.get(0).body.property, 'isDirty');
+		assert.strictEqual(view.events.get(0).body.value, true);
 	});
 
 	it('Should fire event on blur', function() {
@@ -86,6 +83,7 @@ describe('TextArea', function() {
 		let elem = doc.querySelector("textarea[data-property=text]");
 		elem.focus();
 		elem.blur();
-		assert.strictEqual(view.eventName, view.eventPropertyChanged);
+		assert.strictEqual(view.events.count(), 2);
+		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
 	});
 });

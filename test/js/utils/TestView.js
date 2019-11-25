@@ -1,23 +1,16 @@
 
+const collect = require('collect.js');
 const ui = require('../../../lib/src/ui');
 
 class TestView extends ui.View {
 
 	constructor(window, html) {
 		super(window, "test", html, new ui.CssDelegate(new ui.InputCss(), new ui.AnchorCss(), new ui.TableCss(window.document)));
-		this.eventName = null;
-		this.isValidRequired = null;
-		this.body = null;
+		this.events = collect([]);
 	}
 
-	fire(eventName, body) {
-		this.validateAndfire(eventName, false, body);
-	}
-
-	validateAndfire(eventName, isValidRequired, body) {
-		this.eventName = eventName;
-		this.isValidRequired = isValidRequired;
-		this.body = body;
+	fire(event) {
+		this.events.push(event);
 	}
 
 	onTableRow(tableRow, row) {
