@@ -11,6 +11,7 @@ class Person extends ModelObject {
 		'gender' => Property::INT,
 		'birthdate' => Property::DATE,
 		'pet' => Property::STRING,
+		'height' => Property::DECIMAL,
 	];
 
 	private static $mandatories = ['name', 'address', 'zipcode', 'town'];

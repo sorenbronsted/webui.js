@@ -1,7 +1,5 @@
 const collect = require('collect.js');
 const assert = require('assert');
-const numeral = require('numeral');
-const locales = require('numeral/locales');
 const Formatter = require('../../lib/src/ui/Formatter.js').Formatter;
 
 describe('Formatter tests', function() {
@@ -13,7 +11,7 @@ describe('Formatter tests', function() {
 	});
 
 	it("Should convert to a integer", function() {
-		numeral.locale('da-dk');
+		//numeral.locale('da-dk');
 		let fixtures = collect([
 			[1, '1'],
 			[1122, '1.122'],
@@ -30,7 +28,7 @@ describe('Formatter tests', function() {
 	});
 
 	it("Should convert to a decimal", function() {
-		numeral.locale('da-dk');
+		//numeral.locale('da-dk');
 		let fixtures = new Map ([
 			[1.2,'1,20'],
 			[1120.23,'1.120,23'],
