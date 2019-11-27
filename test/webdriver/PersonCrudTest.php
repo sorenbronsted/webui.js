@@ -7,13 +7,16 @@ use PHPUnit\Framework\TestCase;
 
 class PersonCrudTest extends TestCase {
 	private static $page;
+	private static $debug = false;
 
 	public static function setUpBeforeClass() : void {
-		self::$page = new Page();
+		self::$page = new Page(!self::$debug);
 	}
 
 	public static function tearDownAfterClass() : void {
-		self::$page->quit();
+		if (!self::$debug) {
+			self::$page->quit();
+		}
 	}
 
 	protected function setUp() :void {
@@ -21,6 +24,14 @@ class PersonCrudTest extends TestCase {
 	}
 
 	public function testNew() {
+		$fixtures = [
+			"name" => 'Kurt Humbuk',
+			"address" => 'Svindelvej 1',
+			"zipcode" => '2500',
+			"town" => 'Valby',
+			"pet" => 'Hund',
+			"height" => '1,75',
+		];
 		self::$page->goto('http://localhost:8080');
 
 		// Change view
@@ -31,26 +42,32 @@ class PersonCrudTest extends TestCase {
 		$this->assertEquals('Ingen data fundet', $element->getText());
 
 		// Click on New
-		self::$page->click('button[name=create]');
+		self::$page->click('button[name="create"]');
 
 		// Change view
 		self::$page->waitForSelector('button[name="save"]');
 
 		// Find input and a text
-		self::$page->type('input[data-property="name"]', 'Kurt Humbuk');
-		self::$page->type('input[data-property="address"]', 'Svindelvej 1');
-		self::$page->type('input[data-property="zipcode"]', '2500');
-		self::$page->type('input[data-property="town"]', 'Valby');
-		self::$page->type('input[data-property="pet"]', 'Hund');
-		self::$page->type('input[data-property="height"]', '1,75');
-		self::$page->click('button[name=save]');
+		foreach ($fixtures as $name => $value) {
+			self::$page->type("input[data-property=$name]", $value);
+		}
+		self::$page->click('button[name="save"]');
 
+		sleep(1);
 		// Change view
 		self::$page->waitForSelector('button[name="create"]');
 
 		$element = self::$page->getElement('table > tbody > tr > td:nth-child(2) > a');
-		$this->assertEquals('Kurt Humbuk', $element->getText());
+		$this->assertEquals($fixtures['name'], $element->getText());
 		$this->assertStringContainsString('/detail/Person/1', $element->getAttribute('href'));
+		$element->click();
+
+		sleep(1);
+		self::$page->waitForSelector('button[name="save"]');
+		foreach ($fixtures as $name => $value) {
+			$element = self::$page->getElement("input[data-property=$name]");
+			$this->assertEquals($value, $element->getAttribute('value'));
+		}
 	}
 
 	public function testChangeSave() {
