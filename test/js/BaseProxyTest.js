@@ -174,11 +174,32 @@ describe('BaseProxy', function() {
 			let objects = proxy.getAll().objects;
 			let uid = 2;
 			objects.each(item => {
-				assert.strictEqual(itme.uid, uid);
+				assert.strictEqual(item.uid, uid);
 				uid--;
 			});
 		});
 
+	});
+
+	describe('isDirty', function() {
+		beforeEach(function() {
+			proxy = new MyClass();
+			serverResult = JSON.parse('{"MyClass":{"uid":1,"name":"load"}}'); // Simulate server result
+			proxy.add(serverResult)
+		});
+
+		it('Should be dirty', function() {
+			assert.strictEqual(proxy.isDirty(serverResult.MyClass.uid), false);
+			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name, 'name', 1, 'test2'));
+			assert.strictEqual(proxy.isDirty(serverResult.MyClass.uid), true);
+		});
+
+		it('Should be clean', function() {
+			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name, 'name', 1, 'test2'));
+			assert.strictEqual(proxy.isDirty(serverResult.MyClass.uid), true);
+			proxy.add(serverResult)
+			assert.strictEqual(proxy.isDirty(serverResult.MyClass.uid), false);
+		});
 	});
 });
 
