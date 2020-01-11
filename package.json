@@ -1,11 +1,11 @@
 {
-  "name": "webui.js",
+  "name": "webui.lib",
+  "description": "Mvc implementation for SPA in a browser",
   "version": "2.4.0",
-  "description": "webui",
-  "private": true,
+  "private": false,
   "repository": {
     "type": "git",
-    "url": "http://dev.ufds.org/git/ufds/webui.js.git"
+    "url": "https://dev.ufds.org/git/ufds/webui.js.git"
   },
   "files": [
     "lib/"
@@ -22,9 +22,9 @@
   },
   "author": {
     "name": "Søren Brønsted",
-    "email": "sb@ufds.dk"
+    "email": "soren@bronsted.dk"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "jsdom": "12.2.0",
     "jsdom-global": "3.0.2",
