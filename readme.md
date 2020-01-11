@@ -1,8 +1,9 @@
 # Webui.js
-
 Webui.lib is a [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) 
 implementation for [Single-Page-Application](https://en.wikipedia.org/wiki/Single-page_application) in a browser
  
+![](https://github.com/sorenbronsted/webui.js/workflows/CI/badge.svg)
+
 ## Introduction
 
 Writing the client part of a business application can be a complex piece of software, and the best way to tame such a 
