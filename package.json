@@ -1,7 +1,7 @@
 {
   "name": "webui.js",
   "description": "Mvc implementation for SPA in a browser",
-  "version": "2.4.3",
+  "version": "2.4.4",
   "private": false,
   "repository": {
     "type": "git",
