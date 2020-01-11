@@ -1,11 +1,11 @@
 {
-  "name": "webui.lib",
+  "name": "webui.js",
   "description": "Mvc implementation for SPA in a browser",
   "version": "2.4.0",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://dev.ufds.org/git/ufds/webui.js.git"
+    "url": "https://github.com/sorenbronsted/webui.js"
   },
   "files": [
     "lib/"

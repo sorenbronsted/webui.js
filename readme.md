@@ -6,7 +6,7 @@ implementation for [Single-Page-Application](https://en.wikipedia.org/wiki/Singl
 ## Introduction
 
 Writing the client part of a business application can be a complex piece of software, and the best way to tame such a 
-complex thing is to have [high cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science) for robustness, 
+complex thing is to have [high cohesion](https://en.wikipedia.org/wiki/Cohesion_(computer_science)) for robustness, 
 reliability, reusability. and [loose coupling](https://en.wikipedia.org/wiki/Loose_coupling) for encapsulation, 
 so changes in one place does not affect other places.
 
