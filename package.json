@@ -1,7 +1,7 @@
 {
   "name": "webui.js",
   "description": "Mvc implementation for SPA in a browser",
-  "version": "2.4.0",
+  "version": "2.4.3",
   "private": false,
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "name": "Søren Brønsted",
     "email": "soren@bronsted.dk"
   },
-  "license": "MIT",
+  "license": "GPL3",
   "devDependencies": {
     "jsdom": "12.2.0",
     "jsdom-global": "3.0.2",

@@ -1,4 +1,4 @@
-# Webui.lib
+# Webui.js
 
 Webui.lib is a [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) 
 implementation for [Single-Page-Application](https://en.wikipedia.org/wiki/Single-page_application) in a browser
