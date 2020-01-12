@@ -23,4 +23,9 @@ jobs:
         run: npm ci
       
       - name: Running unittests
-        run: npm test       
+        run: npm test
+     
+      - name: Publish
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
