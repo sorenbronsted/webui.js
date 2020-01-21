@@ -10,3 +10,4 @@ doc/coverage
 old_webpack.config.js
 .eslintrc.json
 public/.htaccess
+build/

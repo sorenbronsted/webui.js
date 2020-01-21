@@ -1,7 +1,7 @@
 {
   "name": "webui.js",
   "description": "Mvc implementation for SPA in a browser",
-  "version": "2.4.4",
+  "version": "3.0.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -17,8 +17,9 @@
   },
   "scripts": {
     "test": "mocha -r jsdom-global/register test/js",
-    "coverage": "SPAWN_WRAP_SHIM_ROOT=. nyc --reporter=html --report-dir=doc/coverage mocha -r jsdom-global/register test/js",
-    "bundle": "webpack-cli"
+    "coverage": "SPAWN_WRAP_SHIM_ROOT=. nyc --reporter=html --report-dir=build/coverage mocha -r jsdom-global/register test/js",
+    "bundle": "webpack-cli",
+    "doc": "node node_modules/jsdoc/jsdoc -c jsdoc.json"
   },
   "author": {
     "name": "Søren Brønsted",
@@ -26,6 +27,7 @@
   },
   "license": "GPL3",
   "devDependencies": {
+    "jsdoc": "^3.6.3",
     "jsdom": "12.2.0",
     "jsdom-global": "3.0.2",
     "mocha": "^5.2.0",

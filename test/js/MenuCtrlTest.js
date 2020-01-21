@@ -11,7 +11,7 @@ const ElementValue = require('../../lib/src/mvc/ElementValue.js').ElementValue;
 const CurrentViewState = require('../../lib/src/mvc/CurrentViewState.js').CurrentViewState;
 
 class TestProxy extends MenuProxy {
-	_populate(root) {
+	init(root) {
 		let child = root.push(new Menu(2,'/params', 'p1'));
 		child.push(new Menu(4, '/child4'));
 		child.push(new Menu(5, '/child5'));

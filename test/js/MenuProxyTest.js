@@ -18,7 +18,7 @@ class TestObserver extends Observer {
 }
 
 class TestProxy extends MenuProxy {
-	_populate(root) {
+	init(root) {
 		let child = root.push(new Menu(2,'/params', 'p1'));
 		child.push(new Menu(4, '/child4'));
 		child.push(new Menu(5, '/child5'));
@@ -39,16 +39,16 @@ describe('MenuProxy', function() {
 	});
 
 	it('Should not set any parameters', () => {
-		collect(['', '/A?aa=117']).each(uri => {
-			proxy.setParameter(uri);
+		collect(['', '/A?aa=117']).each(url => {
+			proxy.setParameter(url);
 			proxy.populate();
 			assert.ok(observer.root != null);
 
 			let menu = observer.root.getByUid(2);
-			assert.strictEqual(menu.uri, '');
+			assert.strictEqual(menu.url, '');
 
 			menu = observer.root.getByUid(3);
-			assert.strictEqual(menu.uri, '');
+			assert.strictEqual(menu.url, '');
 		});
 	});
 
@@ -58,10 +58,10 @@ describe('MenuProxy', function() {
 		assert.ok(observer.root !=null);
 
 		let menu = observer.root.getByUid(2);
-		assert.strictEqual(menu.uri, '/params?p1=117');
+		assert.strictEqual(menu.url, '/params?p1=117');
 
 		menu = observer.root.getByUid(3);
-		assert.strictEqual(menu.uri, '/detail/SomeProxy/1');
+		assert.strictEqual(menu.url, '/detail/SomeProxy/1');
 	});
 
 	it('Should select a menu', () => {

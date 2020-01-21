@@ -1,4 +1,5 @@
 
+const collect = require('collect.js');
 const {JSDOM} = require("jsdom");
 const assert = require('assert');
 const mvc = require('../../lib/src/mvc');
@@ -22,7 +23,6 @@ describe('Input', function() {
 				<input data-property="text" autofocus>
 				<input type="file" data-property="file">
 				<input type="checkbox" value="1" data-property="checkbox">
-				<input type="file" data-property="file">
 				<input type="radio" value="male" id="male" checked data-property="gender">
 				<input type="radio" value="female" id="female" data-property="gender">
 			</div>
@@ -164,5 +164,21 @@ describe('Input', function() {
 		elem.dispatchEvent(e);
 		assert.strictEqual(view.events.count(), 1);
 		assert.strictEqual(view.events.get(0).name, view.eventPropertyChanged);
+	});
+
+	it('Should set css values and title on validation errors', function() {
+		let exception = new mvc.ApplicationException(JSON.parse(
+				'[{"class":"MyClass", "property":"text", "type":"error", "msg":"validation error"},' +
+				'{"class":"MyClass", "property":"file", "type":"warning", "msg":"validation warning"}]'
+		));
+		view.show();
+		view.showErrors(exception);
+		let elem = doc.querySelector("input[data-property=text]");
+		assert.strictEqual(elem.title, 'validation error');
+		assert.strictEqual(elem.classList.contains('error'), true);
+
+		elem = doc.querySelector("input[data-property=file]");
+		assert.strictEqual(elem.title, 'validation warning');
+		assert.strictEqual(elem.classList.contains('warning'), true);
 	});
 });

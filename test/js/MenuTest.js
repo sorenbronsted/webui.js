@@ -29,22 +29,22 @@ describe('Menu', function() {
 	});
 
 	it('It should return and uri', () => {
-		assert.strictEqual(root.uri, '/');
+		assert.strictEqual(root.url, '/');
 
 		let noParams = root.getByUid(2);
-		assert.strictEqual(noParams.uri, '/no-params');
+		assert.strictEqual(noParams.url, '/no-params');
 	});
 
 	it('Should return an uri with parameters', () => {
 		let params = root.getByUid(3);
-		assert.strictEqual(params.uri, '');
+		assert.strictEqual(params.url, '');
 
 		root.setParameter(collect({'p1':'me'}));
-		assert.strictEqual(params.uri, '/params?p1=me');
+		assert.strictEqual(params.url, '/params?p1=me');
 
 		root.setParameter(collect({proxy:'SomeProxy', uid:1}));
 		params = root.getByUid('4');
-		assert.strictEqual(params.uri, '/detail/SomeProxy/1');
+		assert.strictEqual(params.url, '/detail/SomeProxy/1');
 	});
 
 	it('Should be selected', () => {
