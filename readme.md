@@ -27,3 +27,5 @@ The best way to explain the webui.js usages is to make and example which brings 
 so checkout the demo-webui.js repo.
 If you need does not fit this this way of making an application, there other extends points to use, but then
 your also need to make more work.
+
+More docs to follow.
