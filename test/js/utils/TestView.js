@@ -5,7 +5,7 @@ const ui = require('../../../lib/src/ui');
 class TestView extends ui.View {
 
 	constructor(window, html) {
-		super(window, "test", html, new ui.CssDelegate(new ui.InputCss(), new ui.AnchorCss(), new ui.TableCss(window.document)));
+		super(window, "test", html, new ui.CssDelegate(new ui.InputCss(), new ui.AnchorCss(), new ui.TableCss(window.document), new ui.ViewCss()));
 		this.events = collect([]);
 	}
 

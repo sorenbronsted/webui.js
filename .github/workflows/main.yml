@@ -26,6 +26,6 @@ jobs:
         run: npm test
      
       - name: Publish
-        run: npm publish --access public
+        run: npm publish --@sorenbronsted:registry=https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

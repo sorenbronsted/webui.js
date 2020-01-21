@@ -13,7 +13,7 @@ class PersonApp extends mvc.App {
 	async _init() {
 		let rest   = new mvc.Rest(this._httpCtor);
 		let store  = new mvc.RestStore(rest, this._formCtor);
-		let css    = new ui.CssDelegate(new ui.InputCssW3(), new ui.AnchorCssW3(), new ui.TableCssW3(this._window.document));
+		let css    = new ui.CssDelegate(new ui.InputCssW3(), new ui.AnchorCssW3(), new ui.TableCssW3(this._window.document), new ui.ViewCssW3());
 		let router = new mvc.Router(this._window);
 
 		// Add elements to repo

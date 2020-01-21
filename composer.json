@@ -2,27 +2,33 @@
   "name": "ufds/webui.js",
   "description": "WebUi Example App",
   "license": "Private",
-  "config": {
-    "platform": {
-      "php": "7.0"
-    },
-    "secure-http": false
-  },
 
   "autoload": {
     "psr-4": { "ufds\\": ["application/model"] }
   },
 
+  "scripts": {
+    "test": "vendor/bin/phpunit -c test-conf.xml",
+    "coverage": "vendor/bin/phpunit -c test-conf.xml --coverage-html build/coverage"
+  },
+  "config": {
+    "secure-http": false
+  },
   "require": {
+    "php": ">=7.0",
     "ruckusing/ruckusing-migrations" : "dev-master",
     "ufds/libdatabase": "dev-master",
     "ufds/libtypes": "dev-master",
     "ufds/libcommon": "dev-master",
     "ufds/librest": "dev-master",
-    "ufds/libutil": "dev-master",
-    "facebook/webdriver": "^1.7"
+    "ufds/libutil": "dev-master"
   },
-  
+
+  "require-dev": {
+    "phpunit/phpunit": "^8.5",
+    "php-webdriver/webdriver": "^1.7"
+  },
+
   "repositories": [
     {"type": "composer","url": "http://dev.ufds.org/satis"}
   ]
