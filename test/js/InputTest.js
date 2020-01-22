@@ -168,17 +168,27 @@ describe('Input', function() {
 
 	it('Should set css values and title on validation errors', function() {
 		let exception = new mvc.ApplicationException(JSON.parse(
-				'[{"class":"MyClass", "property":"text", "type":"error", "msg":"validation error"},' +
-				'{"class":"MyClass", "property":"file", "type":"warning", "msg":"validation warning"}]'
+				'[{"class":"MyClass", "property":"text", "type":"error", "msg":"validation error"}]'
 		));
 		view.show();
+
 		view.showErrors(exception);
 		let elem = doc.querySelector("input[data-property=text]");
 		assert.strictEqual(elem.title, 'validation error');
 		assert.strictEqual(elem.classList.contains('error'), true);
+		assert.strictEqual(view.isValid, false);
+	});
 
-		elem = doc.querySelector("input[data-property=file]");
+	it('Should set css values and title on validation warning', function() {
+		let exception = new mvc.ApplicationException(JSON.parse(
+				'[{"class":"MyClass", "property":"text", "type":"warning", "msg":"validation warning"}]'
+		));
+		view.show();
+
+		view.showErrors(exception);
+		let elem = doc.querySelector("input[data-property=text]");
 		assert.strictEqual(elem.title, 'validation warning');
 		assert.strictEqual(elem.classList.contains('warning'), true);
+		assert.strictEqual(view.isValid, true);
 	});
 });
