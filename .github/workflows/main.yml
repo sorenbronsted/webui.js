@@ -24,8 +24,9 @@ jobs:
       
       - name: Running unittests
         run: npm test
-     
-      - name: Publish
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      # This does not seem to work
+      #- name: Publish
+      #  run: npm publish --access public
+      #  env:
+      #    NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
