@@ -29,7 +29,7 @@ describe('Input', function() {
 		`);
 		doc = browser.window.document;
 		object = new MyClass();
-		object.add(JSON.parse('{"MyClass":{"uid":1,"text":"load", "checkbox":1, "gender":"female"}}'));
+		object.add(JSON.parse('{"class":"MyClass","uid":1,"text":"load", "checkbox":1, "gender":"female"}'));
 	});
 
 	it('Should contain a value on populate', function() {

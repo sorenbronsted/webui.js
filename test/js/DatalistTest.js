@@ -16,7 +16,7 @@ class MyClass extends mvc.BaseProxy {
 class MyList extends mvc.BaseProxy {
 	constructor() {
 		super();
-		super.addAll(collect(JSON.parse('[{"MyList":{"uid":1,"text":"dog"}},{"MyList":{"uid":2,"text":"cat"}}]')));
+		super.addAll(collect(JSON.parse('[{"class":"MyList","uid":1,"text":"dog"},{"class":"MyList","uid":2,"text":"cat"}]')));
 	}
 }
 

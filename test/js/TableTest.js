@@ -18,8 +18,8 @@ describe('Table', function() {
 	beforeEach(function() {
 		object = new MyClass();
 		object.addAll(collect(JSON.parse(
-			'[{"MyClass":{"uid":1,"name":"Kurt Humbuk", "address":"Svindelvej 1"}},' +
-			'{"MyClass":{"uid":2,"name":"Yrsa Humbuk", "address":"Svindelvej 2"}}]'
+			'[{"class":"MyClass","uid":1,"name":"Kurt Humbuk", "address":"Svindelvej 1"},' +
+			'{"class":"MyClass","uid":2,"name":"Yrsa Humbuk", "address":"Svindelvej 2"}]'
 		)));
 
 		let browser = new TestBrowser();

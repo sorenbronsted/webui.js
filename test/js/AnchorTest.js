@@ -16,7 +16,7 @@ describe('Anchor', function() {
 		view = new TestView(browser.window,
 			`<div data-class="BaseProxy"><a data-property="name" data-uid="1" data-type="menu"></a></div>`);
 		object = new mvc.BaseProxy();
-		object.add(JSON.parse('{"BaseProxy":{"uid":1,"name":"load","selected":"true","visible":"true"}}'));
+		object.add(JSON.parse('{"class":"BaseProxy","uid":1,"name":"load","selected":"true","visible":"true"}'));
 		view.show();
 		view.populate(mvc.BaseProxy.name, object.get(1));
 	});

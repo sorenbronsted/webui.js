@@ -19,22 +19,22 @@ class MyClass extends mvc.BaseProxy {
 }
 
 describe('BaseProxy', function() {
-	let serverResult;
+	let object;
 	let proxy;
 
 	describe('#add', function() {
 		beforeEach(function() {
-			serverResult = JSON.parse('{"MyClass":{"uid":1,"name":"load"}}'); // Simulate server result
+			object = JSON.parse('{"class":"MyClass","uid":1,"name":"load"}'); // Simulate server result
 			proxy = new MyClass();
 		});
 
 		it('Should exists', function() {
-			proxy.add(serverResult);
+			proxy.add(object);
 			assert(proxy.size() === 1);
 		});
 
 		it('Should be the same', function() {
-			proxy.add(serverResult);
+			proxy.add(object);
 			let o = proxy.get(1);
 			assert(o !== undefined);
 			assert(o.uid === 1);
@@ -42,28 +42,32 @@ describe('BaseProxy', function() {
 			assert(proxy.has(1) === true)
 		});
 
-		it('Should fail on different class', function() {
-			assert.throws(() => { proxy.add({}) },/same class/);
+		it('Should fail on missing uid', function() {
+			assert.throws(() => { proxy.add({}) },/must have an uid property/);
 		});
 
-		it('Should fail on missing uid', function() {
-			assert.throws(() => { proxy.add({MyClass:{}}) },/must have .* uid/);
+		it('Should fail on missing class', function() {
+			assert.throws(() => { proxy.add({uid:1}) },/must have a class property/);
+		});
+
+		it('Should fail on different class', function() {
+			assert.throws(() => { proxy.add({uid:1,class:'x'}) },/same class/);
 		});
 	});
 
 	describe('#addAll', function() {
 		beforeEach(function() {
-			serverResult = collect(JSON.parse('[{"MyClass":{"uid":1,"name":"test1"}},{"MyClass":{"uid":2,"name":"test2"}}]')); // Simulate server result
+			object = collect(JSON.parse('[{"class":"MyClass","uid":1,"name":"test1"},{"class":"MyClass","uid":2,"name":"test2"}]')); // Simulate server result
 			proxy = new MyClass();
 		});
 
 		it('Should exists', function() {
-			proxy.addAll(serverResult);
+			proxy.addAll(object);
 			assert.strictEqual(proxy.size(), 2);
 		});
 
 		it('Should be same size', function() {
-			proxy.addAll(serverResult);
+			proxy.addAll(object);
 			let size = 0;
 			proxy.getAll().objects.each(o => {
 				assert(o !== undefined);
@@ -77,12 +81,12 @@ describe('BaseProxy', function() {
 
 	describe('#remove', function() {
 		beforeEach(function() {
-			serverResult = JSON.parse('{"MyClass":{"uid":1,"name":"load"}}'); // Simulate server result
+			object = JSON.parse('{"class":"MyClass","uid":1,"name":"load"}'); // Simulate server result
 			proxy = new MyClass();
 		});
 
 		it('Should end on zero', function() {
-			proxy.add(serverResult);
+			proxy.add(object);
 			assert(proxy.size() === 1);
 			proxy.remove(1);
 			assert(proxy.size() === 0);
@@ -91,12 +95,12 @@ describe('BaseProxy', function() {
 
 	describe('#setProperty', function() {
 		beforeEach(function() {
-			serverResult = JSON.parse('{"MyClass":{"uid":1,"name":"load"}}'); // Simulate server result
+			object = JSON.parse('{"class":"MyClass","uid":1,"name":"load"}'); // Simulate server result
 			proxy = new MyClass();
 		});
 
 		it('Should exists and set a property', function() {
-			proxy.add(serverResult);
+			proxy.add(object);
 			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name, 'name', 1, 'test2'));
 			let o = proxy.get(1);
 			assert(undefined !== o);
@@ -155,7 +159,7 @@ describe('BaseProxy', function() {
 
 	describe('#getAll', function() {
 		beforeEach(function () {
-			serverResult = collect(JSON.parse('[{"MyClass":{"uid":1,"name":"test1"}},{"MyClass":{"uid":2,"name":"test2"}}]')); // Simulate server result
+			object = collect(JSON.parse('[{"class":"MyClass","uid":1,"name":"test1"},{"class":"MyClass","uid":2,"name":"test2"}]')); // Simulate server result
 			proxy = new MyClass();
 		});
 
@@ -184,21 +188,21 @@ describe('BaseProxy', function() {
 	describe('isDirty', function() {
 		beforeEach(function() {
 			proxy = new MyClass();
-			serverResult = JSON.parse('{"MyClass":{"uid":1,"name":"load"}}'); // Simulate server result
-			proxy.add(serverResult)
+			object = JSON.parse('{"class":"MyClass","uid":1,"name":"load"}'); // Simulate server result
+			proxy.add(object)
 		});
 
 		it('Should be dirty', function() {
-			assert.strictEqual(proxy.isDirty(serverResult.MyClass.uid), false);
+			assert.strictEqual(proxy.isDirty(object.uid), false);
 			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name, 'name', 1, 'test2'));
-			assert.strictEqual(proxy.isDirty(serverResult.MyClass.uid), true);
+			assert.strictEqual(proxy.isDirty(object.uid), true);
 		});
 
 		it('Should be clean', function() {
 			proxy.setPropertyByElement(new mvc.ElementValue(MyClass.name, 'name', 1, 'test2'));
-			assert.strictEqual(proxy.isDirty(serverResult.MyClass.uid), true);
-			proxy.add(serverResult)
-			assert.strictEqual(proxy.isDirty(serverResult.MyClass.uid), false);
+			assert.strictEqual(proxy.isDirty(object.uid), true);
+			proxy.add(object)
+			assert.strictEqual(proxy.isDirty(object.uid), false);
 		});
 	});
 });

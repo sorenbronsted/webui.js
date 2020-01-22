@@ -18,7 +18,7 @@ describe('Button', function() {
 		view = new TestView(browser.window,
 			`<div data-class="MyClass"><button name="save" data-validate="false">save</button></div>`);
 		object = new MyClass();
-		object.add(JSON.parse('{"MyClass":{"uid":1,"name":"load","active":"true"}}'));
+		object.add(JSON.parse('{"class":"MyClass","uid":1,"name":"load","active":"true"}'));
 		view.show();
 		view.populate(MyClass.name, object.get(1));
 	});

@@ -29,7 +29,7 @@ describe('InputValidator tests', function() {
 			`<div data-class="MyClass"><input data-property="email" data-type="email" value="${fixture}"></div>`);
 
 		let object = new MyClass();
-		object.add(JSON.parse(`{"MyClass":{"uid":1,"email":"${fixture}"}}`));
+		object.add(JSON.parse(`{"class":"MyClass","uid":1,"email":"${fixture}"}`));
 
 		view.show();
 		view.populate(MyClass.name, object.getAll());

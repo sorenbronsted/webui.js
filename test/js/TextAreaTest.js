@@ -9,7 +9,7 @@ const TestBrowser = require('./utils/TestBrowser').TestBrowser;
 class MyClass extends mvc.BaseProxy {
 	constructor() {
 		super();
-		super.add(JSON.parse('{"MyClass":{"uid":1,"text":"load", "checkbox":"1", "gender":"female"}}'));
+		super.add(JSON.parse('{"class":"MyClass","uid":1,"text":"load", "checkbox":"1", "gender":"female"}'));
 	}
 }
 

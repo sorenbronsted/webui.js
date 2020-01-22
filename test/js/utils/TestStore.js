@@ -34,9 +34,8 @@ class TestStore extends mvc.Store {
 			});
 
 			if (match === parameters.values().count()) {
-				let o = {};
-				o[cls] = value;
-				result.push(o);
+				value.class = cls;
+				result.push(value);
 			}
 		});
 		if (result.count() === 0) {

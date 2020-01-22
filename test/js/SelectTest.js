@@ -10,14 +10,14 @@ const TestBrowser = require('./utils/TestBrowser').TestBrowser;
 class MyClass extends mvc.BaseProxy {
 	constructor() {
 		super();
-		super.add(JSON.parse('{"MyClass":{"uid":1,"value_uid":2}}'));
+		super.add(JSON.parse('{"class":"MyClass","uid":1,"value_uid":2}'));
 	}
 }
 
 class MyList extends mvc.BaseProxy {
 	constructor() {
 		super();
-		super.addAll(collect(JSON.parse('[{"MyList":{"uid":1,"text":"load 1"}},{"MyList":{"uid":2,"text":"load 2"}}]')));
+		super.addAll(collect(JSON.parse('[{"class":"MyList","uid":1,"text":"load 1"},{"class":"MyList","uid":2,"text":"load 2"}]')));
 	}
 }
 
