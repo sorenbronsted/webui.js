@@ -12,20 +12,71 @@ so changes in one place does not affect other places.
 
 Mvc architecture is implemented by using the [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern) 
 where the model and view are subjects and the controller is an observer.
-The model and view communicates with the controller by passing events to it, and the controller takes action 
-upon the received event. 
-The model acts a proxy for some persistent domain entity and holds a list of these entities. 
-The view has a html fragment and has an id of an element where to it attaches it self when shown.
 
-A client typical has many controllers, views and models and to orchestrates the client though links and/or menus, 
-you need to control which controllers is active at a given time. One way to do this, is to make the controller 
-dependent on the information in the browsers location object, so when the location object changes each controller 
-knows if it should react or not.
+## How is data mapped to html elements?
+Image you have a person defined by this class:
+```
+class Person {
+  constructor(name,addess,zipcode,town) {
+    this.name = name;
+    this.address = address;
+    this.zipcode = zipcode;
+    this.town = town;
+  }
 
-## Overview
-The best way to explain the webui.js usages is to make and example which brings together i necessary classes, 
-so checkout the demo-webui.js repo.
-If you need does not fit this this way of making an application, there other extends points to use, but then
-your also need to make more work.
+  ...    
+}
+```
 
-More docs to follow.
+Then `name` property is mapped to an html element like  this `input` element:
+```
+<input data-class="Person" data-property="name">
+```
+or all the properties is mapped to input elements in a form element like this:
+```
+<form data-class="Person">
+  <input data-property="name">
+  <input data-property="address">
+  <input data-property="zipcode">
+  <input data-property="town">
+</form>
+```
+Here the html input elements inherits the `data-class` information from the parent element.
+The view has html fragment which it is responsible for, and which is shown on demand from the controller. 
+
+## How is data flowing?
+The data flows between MVC elements by events to have loose coupling. The event is defined like this:
+```
+class Event {
+  constructor(sender, name, body) {
+    this.sender = sender;
+    this.name = name;
+    this.body = body;
+  }
+}
+```
+
+The view sends the following events when:
+ * a input element has changed , the name of event is `propertyChanged`, with the name of the property 
+ and the new value in the body
+ * an anchor element is clicked, the name of the event is `click`, with url information in the body
+ * a button is pressed, the name of the event is the `data-property` from the button 
+
+The model sends the following events when:
+ * data is available from an asynchronous/rest call, the  name of the event is `ok` with the data in the body
+ * the asynchronous/rest call fails, the name of the event is `fail` with information in body
+
+## How is the data flow controlled?
+A controller overrides the `handleEvent` method and can thereby reacts to events send to it, and 
+transforms them to method calls on the model or the view. 
+Manage the state of the controller can be complex, so to help with this, you can use a state machine to do that. 
+
+## How is the application controlled?
+To manage the state of the application i done by the dom location object, which the router reacts to. 
+The router is a subject and all controllers listen for event from it, and uses it to change the location. 
+Every controller has an activation url and when there is a match between this url and the url from the router, 
+then the controller is active. When the url's does not match then it is not active. In this way you can control
+whether a controller shall react to events or not.
+
+## More information
+See [documentation](https://sorenbronsted.github.io/webui.js/index.html) for this project.
