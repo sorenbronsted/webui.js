@@ -35,6 +35,27 @@ describe('StaticProxy', function() {
 		assert.notStrictEqual(observer.root.body, null);
 	});
 
+	it('Should not allow to delete data', function() {
+		let proxy = repo.get(mvc.StaticProxy.name);
+		proxy.delete(1);
+		assert.strictEqual(observer.root.sender, mvc.StaticProxy.name);
+		assert.strictEqual(observer.root.name, proxy.eventFail);
+	});
+
+	it('Should not allow to create data', function() {
+		let proxy = repo.get(mvc.StaticProxy.name);
+		proxy.create();
+		assert.strictEqual(observer.root.sender, mvc.StaticProxy.name);
+		assert.strictEqual(observer.root.name, proxy.eventFail);
+	});
+
+	it('Should not allow to update data', function() {
+		let proxy = repo.get(mvc.StaticProxy.name);
+		proxy.update({uid: 1, name: 'test', class: mvc.StaticProxy.name});
+		assert.strictEqual(observer.root.sender, mvc.StaticProxy.name);
+		assert.strictEqual(observer.root.name, proxy.eventFail);
+	});
+
 	it('Should fail', function() {
 		store.triggerError = true;
 		let proxy = repo.get(mvc.StaticProxy.name);
