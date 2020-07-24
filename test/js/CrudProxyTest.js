@@ -1,6 +1,5 @@
 
 const assert= require('assert');
-const collect = require('collect.js');
 const mvc = require('../../lib/src/mvc');
 const TestStore = require('./utils/TestStore.js').TestStore;
 const TestObserver = require('./utils/TestObserver.js').TestObserver;
@@ -20,7 +19,7 @@ describe('CrudProxy', function() {
 		observer = new TestObserver(repo);
 	});
 
-	it('Shold create data', function () {
+	it('Should create data', function () {
 		let proxy = repo.get(mvc.CrudProxy.name);
 		proxy.create();
 		assert.strictEqual(observer.root.sender, mvc.CrudProxy.name);
