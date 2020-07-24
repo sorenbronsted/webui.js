@@ -112,18 +112,25 @@ describe('ListController', function() {
 		assert.strictEqual(view.location, url+'/detail/TestProxy/new');
 	});
 
-	it('Should be an edit url', function() {
+	it('Should be an default edit url', function() {
 		router.goto('/list/TestProxy');
 		view.validateAndfire("edit", false, new mvc.ElementValue(TestProxy.name, 'edit', 1, null));
 		assert.strictEqual(ctrl.state, ctrl.states.start);
 		assert.strictEqual(view.location, url+'/detail/TestProxy/1');
 	});
 
+	it('Should be an edit url', function() {
+		router.goto('/list/TestProxy');
+		view.validateAndfire("edit", false, new mvc.ElementValue(TestProxy.name, 'edit', 1, '/detail/NewProxy/1'));
+		assert.strictEqual(ctrl.state, ctrl.states.start);
+		assert.strictEqual(view.location, url+'/detail/NewProxy/1');
+	});
+
 	it('Should fail on proxy not found', function() {
 		router.goto('/list/TestProxy');
 		view.confirmAnswer = true;
-		view.validateAndfire("delete", false, new mvc.ElementValue(TestProxy.name, 'delete', 10, null));
+		view.validateAndfire("delete", false, new mvc.ElementValue(TestProxy.name, 'delete', 10, '/detail/UnkownProxy/1'));
 		assert.strictEqual(view.error.message, 'Object not found');
-		assert.strictEqual(ctrl.state,ctrl.states.input);
+		assert.strictEqual(ctrl.state, ctrl.states.input);
 	});
 });
