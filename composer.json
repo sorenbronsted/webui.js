@@ -1,35 +1,44 @@
 {
-  "name": "ufds/webui.js",
+  "name": "sbronsted/webui.js",
   "description": "WebUi Example App",
-  "license": "Private",
-
-  "autoload": {
-    "psr-4": { "ufds\\": ["application/model"] }
-  },
+  "license": "GPL3",
 
   "scripts": {
-    "test": "vendor/bin/phpunit -c test-conf.xml",
-    "coverage": "vendor/bin/phpunit -c test-conf.xml --coverage-html build/coverage"
+    "test": "vendor/bin/phpunit --testsuite 'Application Test Suite'",
+    "coverage": "vendor/bin/phpunit --testsuite 'Application Test Suite' --coverage-html build/coverage",
+    "testui": "vendor/bin/phpunit --testsuite 'Webdriver Test Suite'"
   },
+
   "config": {
     "secure-http": false
   },
+
+  "autoload": {
+    "psr-4": {
+      "sbronsted\\": [
+        "application/model"
+      ]
+    }
+  },
+
   "require": {
-    "php": ">=7.0",
-    "ruckusing/ruckusing-migrations" : "dev-master",
-    "ufds/libdatabase": "dev-master",
-    "ufds/libtypes": "dev-master",
-    "ufds/libcommon": "dev-master",
-    "ufds/librest": "dev-master",
-    "ufds/libutil": "dev-master"
+    "php": ">=7.1",
+    "ruckusing/ruckusing-migrations" : "^1.1",
+    "sbronsted/libdatabase": "^2.1",
+    "sbronsted/librest": "^4.1"
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "sbronsted\\": [
+        "test/utils",
+        "test/webdriver"
+      ]
+    }
   },
 
   "require-dev": {
     "phpunit/phpunit": "^8.5",
     "php-webdriver/webdriver": "^1.7"
-  },
-
-  "repositories": [
-    {"type": "composer","url": "http://dev.ufds.org/satis"}
-  ]
+  }
 }

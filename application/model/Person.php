@@ -1,5 +1,5 @@
 <?php
-namespace ufds;
+namespace sbronsted;
 
 class Person extends ModelObject {
 	private static $properties = [
@@ -16,18 +16,18 @@ class Person extends ModelObject {
 
 	private static $mandatories = ['name', 'address', 'zipcode', 'town'];
 
-	public function save() {
+	public function save() : void {
 		if (is_null($this->gender)) {
 			$this->gender = 2;
 		}
 		parent::save();
 	}
 
-	protected function getProperties() {
+	protected function getProperties() : array {
 		return self::$properties;
 	}
 
-	public function getMandatories() {
+	public function getMandatories() : array {
 		return self::$mandatories;
 	}
 }

@@ -1,7 +1,5 @@
 <?php
-namespace ufds;
-
-require('test/settings.php');
+namespace sbronsted;
 
 use PHPUnit\Framework\TestCase;
 

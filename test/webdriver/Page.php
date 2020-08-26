@@ -1,5 +1,5 @@
 <?php
-namespace ufds;
+namespace sbronsted;
 
 use Exception;
 use Facebook\WebDriver\Chrome\ChromeDriver;

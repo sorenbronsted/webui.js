@@ -1,5 +1,5 @@
 <?php
-namespace ufds;
+namespace sbronsted;
 
 
 class Fixture {
@@ -10,6 +10,7 @@ class Fixture {
 		$o->address = 'somewhere on earth';
 		$o->zipcode = 2750;
 		$o->town = 'Valby';
+		$o->gender = 1;
 		return $o;
 	}
 }

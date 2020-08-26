@@ -1,7 +1,4 @@
-<?php
-namespace ufds;
-
-require_once 'test/settings.php';
+<?php namespace sbronsted;
 
 class PersonTest extends BaseCrud {
 

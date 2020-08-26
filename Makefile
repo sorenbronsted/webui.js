@@ -7,8 +7,11 @@ all:	install coverage
 test:
 	npm test
 
-test-ui:
-	bin/phpunit_8.phar test/webdriver
+testui:
+	bin/composer.phar run testui
+
+testapp:
+	bin/composer.phar run test
 
 coverage:
 	npm run coverage

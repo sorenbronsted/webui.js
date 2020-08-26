@@ -1,17 +1,16 @@
 <section id="PersonDetail">
-	<section class="w3-bar w3-card-2 w3-margin-top">
-		<button name="cancel" data-class="Person" class="w3-bar-item w3-button w3-blue" data-validate="false">Fortryd
-		</button>
-		<button name="save" class="w3-bar-item w3-button w3-blue" data-class="Person">Gem</button>
-	</section>
+	<form data-class="Person">
+		<section class="w3-bar w3-card-2 w3-margin-top">
+			<button name="cancel" class="w3-bar-item w3-button w3-blue" data-validate="false">Fortryd</button>
+			<button name="save" class="w3-bar-item w3-button w3-blue">Gem</button>
+		</section>
 
-	<section id="detail">
-		<div class="w3-container w3-cell w3-card-2 w3-margin-top w3-margin-right w3-left default-width">
-			<h4>Person</h4>
-			<div class="w3-padding-16">
-				<form data-class="Person">
+		<section id="detail">
+			<div class="w3-container w3-cell w3-card-2 w3-margin-top w3-margin-right w3-left default-width">
+				<h4>Person</h4>
+				<div class="w3-padding-16">
 					<label for="name" class="w3-label w3-text-gray">Name</label>
-					<input id="name" type="text" data-property="name" required="required" class="w3-input">
+					<input id="name" type="text" data-property="name" required class="w3-input">
 
 					<label for="address" class="w3-label w3-text-gray">Address</label>
 					<input id="address" type="text" data-property="address" required class="w3-input">
@@ -35,8 +34,8 @@
 
 					<label for="height" class="w3-label w3-text-gray">Height</label>
 					<input id="height" type="text" data-property="height" data-type="number" data-format="#,##0.00" class="w3-input">
-				</form>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</form>
 </section>

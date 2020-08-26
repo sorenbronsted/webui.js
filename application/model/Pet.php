@@ -1,5 +1,5 @@
 <?php
-namespace ufds;
+namespace sbronsted;
 
 use RuntimeException;
 
@@ -10,7 +10,7 @@ class Pet implements RestEnable {
 	 * @param $uid uniq identifier for an object
 	 * @return RestEnable object
 	 */
-	public static function getByUid($uid) {
+	public static function getByUid(int $uid) : object {
 		throw new RuntimeException('Not implemented');
 	}
 
@@ -20,7 +20,7 @@ class Pet implements RestEnable {
 	 * @param $order an array properties to order by
 	 * @return array of RestEnable objects
 	 */
-	public static function getBy(array $qbe, array $order) {
+	public static function getBy(array $qbe, array $order) : array {
 		throw new RuntimeException('Not implemented');
 	}
 
@@ -29,11 +29,11 @@ class Pet implements RestEnable {
 	 * @param $order an array properties to order by
 	 * @return array of RestEnable objects
 	 */
-	public static function getAll(array $order) {
+	public static function getAll(array $order) : array {
 		$genders = [
-			(object)['Pet' => (object)['uid' => 1, 'name' => 'Hund']],
-			(object)['Pet' => (object)['uid' => 2, 'name' => 'Kat']],
-			(object)['Pet' => (object)['uid' => 3, 'name' => 'Hest']],
+			(object)['uid' => 1, 'name' => 'Hund', "class" => "Pet"],
+			(object)['uid' => 2, 'name' => 'Kat', "class" => "Pet"],
+			(object)['uid' => 3, 'name' => 'Hest', "class" => "Pet"],
 		];
 
 		return $genders;
@@ -44,7 +44,7 @@ class Pet implements RestEnable {
 	 * @param $data a map properties and values
 	 * @return none
 	 */
-	public function setData(array $data) {
+	public function setData(array $data) : void {
 		throw new RuntimeException('Not implemented');
 	}
 
@@ -52,7 +52,7 @@ class Pet implements RestEnable {
 	 * Persist the object
 	 * @return map with the uid
 	 */
-	public function save() {
+	public function save() : void {
 		throw new RuntimeException('Not implemented');
 	}
 
@@ -60,7 +60,7 @@ class Pet implements RestEnable {
 	 * Delete a given object
 	 * @return none
 	 */
-	public function destroy() {
+	public function destroy() : void {
 		throw new RuntimeException('Not implemented');
 	}
 }

@@ -11,3 +11,4 @@ old_webpack.config.js
 .eslintrc.json
 public/.htaccess
 build/
+test_ini.php

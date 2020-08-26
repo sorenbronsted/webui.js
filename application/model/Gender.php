@@ -1,5 +1,5 @@
 <?php
-namespace ufds;
+namespace sbronsted;
 
 use RuntimeException;
 
@@ -10,7 +10,7 @@ class Gender implements RestEnable {
 	 * @param $uid uniq identifier for an object
 	 * @return RestEnable object
 	 */
-	public static function getByUid($uid) {
+	public static function getByUid(int $uid) : object {
 		throw new RuntimeException('Not implemented');
 	}
 
@@ -20,7 +20,7 @@ class Gender implements RestEnable {
 	 * @param $order an array properties to order by
 	 * @return array of RestEnable objects
 	 */
-	public static function getBy(array $qbe, array $order) {
+	public static function getBy(array $qbe, array $order) : iterable{
 		throw new RuntimeException('Not implemented');
 	}
 
@@ -29,10 +29,10 @@ class Gender implements RestEnable {
 	 * @param $order an array properties to order by
 	 * @return array of RestEnable objects
 	 */
-	public static function getAll(array $order) {
+	public static function getAll(array $order) : iterable {
 		$genders = [
-			(object)['Gender' => (object)['uid' => 1, 'name' => 'Mand']],
-			(object)['Gender' => (object)['uid' => 2, 'name' => 'Kvinde']],
+			(object)['uid' => 1, 'name' => 'Mand', 'class' => 'Gender'],
+			(object)['uid' => 2, 'name' => 'Kvinde', 'class' => 'Gender'],
 		];
 
 		return $genders;
@@ -43,7 +43,7 @@ class Gender implements RestEnable {
 	 * @param $data a map properties and values
 	 * @return none
 	 */
-	public function setData(array $data) {
+	public function setData(array $data) : void {
 		throw new RuntimeException('Not implemented');
 	}
 
@@ -51,7 +51,7 @@ class Gender implements RestEnable {
 	 * Persist the object
 	 * @return map with the uid
 	 */
-	public function save() {
+	public function save() : void {
 		throw new RuntimeException('Not implemented');
 	}
 
@@ -59,7 +59,7 @@ class Gender implements RestEnable {
 	 * Delete a given object
 	 * @return none
 	 */
-	public function destroy() {
+	public function destroy() : void {
 		throw new RuntimeException('Not implemented');
 	}
 }

@@ -8,6 +8,6 @@ To make this work you much install [chromium-webdriver](https://chromedriver.chr
 On ubuntu you just `apt install chromium-chromedriver` or download it from the website. It is important that
 the chromium-webdriver matches the chromium-browser version.
 
-I have tried [puppeteer](https://pptr.dev) which has a nice api and everything i packages together in npm. 
+I have tried [puppeteer](https://pptr.dev) which has a nice api and everything is packages together in npm. 
 But I think it is hard to use, because of timing issues between the test client (node process) and
 the the web browser. This standard webdriver approach is much more stable.  

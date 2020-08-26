@@ -1,5 +1,5 @@
 <?php
-namespace ufds;
+namespace sbronsted;
 
 use PHPUnit\Framework\TestCase;
 
@@ -40,7 +40,7 @@ abstract class BaseCrud extends TestCase {
 				$this->fail("Expected ValidationException, $mandatory");
 			}
 			catch (ValidationException $e) {
-				$this->assertNotNull($e->$mandatory);
+				$this->assertTrue($e->hasValidations());
 				//Ignore
 			}
 			$object->$mandatory = $oldValue;

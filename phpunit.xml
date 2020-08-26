@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.5/phpunit.xsd"
+         bootstrap="test/bootstrap.php"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         verbose="true">
+    <testsuites>
+        <testsuite name="Application Test Suite">
+            <directory suffix=".php">test/php</directory>
+        </testsuite>
+        <testsuite name="Webdriver Test Suite">
+             <directory suffix=".php">test/webdriver</directory>
+        </testsuite>
+    </testsuites>
+       <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">application</directory>
+            <exclude>
+                <directory>vendor</directory>
+                <directory>test</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <php>
+        <ini name="memory_limit" value="2048M"/>
+        <ini name="max_execution_time" value="60"/>
+        <ini name="display_errors" value="On" />
+        <ini name="display_startup_errors" value="On" />
+    </php>
+</phpunit>

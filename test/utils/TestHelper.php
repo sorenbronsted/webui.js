@@ -1,6 +1,6 @@
 <?php
 
-namespace ufds;
+namespace sbronsted;
 
 
 class TestHelper {
