@@ -14,7 +14,7 @@ Mvc architecture is implemented by using the [observer pattern](https://en.wikip
 where the model and view are subjects and the controller is an observer.
 
 ## How is data mapped to html elements?
-Image you have a person defined by this class:
+Imaging you have a person defined by this class:
 ```
 class Person {
   constructor(name,addess,zipcode,town) {
@@ -57,26 +57,27 @@ class Event {
 ```
 
 The view sends the following events when:
- * a input element has changed , the name of event is `propertyChanged`, with the name of the property 
+ * an input element has changed, the name of event is `propertyChanged`, with the name of the property 
  and the new value in the body
  * an anchor element is clicked, the name of the event is `click`, with url information in the body
  * a button is pressed, the name of the event is the `data-property` from the button 
 
 The model sends the following events when:
- * data is available from an asynchronous/rest call, the  name of the event is `ok` with the data in the body
- * the asynchronous/rest call fails, the name of the event is `fail` with information in body
+ * data is available from an asynchronous/rest call, the name of the event is `ok` with the data in the body
+ * the asynchronous/rest call fails, the name of the event is `fail` with error information in body
 
 ## How is the data flow controlled?
 A controller overrides the `handleEvent` method and can thereby reacts to events send to it, and 
 transforms them to method calls on the model or the view. 
-Manage the state of the controller can be complex, so to help with this, you can use a state machine to do that. 
+Managing the state of the controller can be complex, so to help with this, you can use a state machine to do that.
+The `BaseController` has a `StateMachine` which is populated with the basic start and input states. 
 
 ## How is the application controlled?
-To manage the state of the application i done by the dom location object, which the router reacts to. 
-The router is a subject and all controllers listen for event from it, and uses it to change the location. 
-Every controller has an activation url and when there is a match between this url and the url from the router, 
-then the controller is active. When the url's does not match then it is not active. In this way you can control
-whether a controller shall react to events or not.
+To manage the state of the application i done by the browsers location object, which the router reacts to. 
+The router is a subject and all controllers listen for event from it, and the router also uses it to change the location. 
+Every controller has an activation url and when there is a match between activation url and the url from the router, 
+then the controller is active. When the url's does not match then the controller is not active. 
+In this way you can control whether a controller shall react to events or not.
 
 ## More information
 See [documentation](https://sorenbronsted.github.io/webui.js/index.html) for this project.
