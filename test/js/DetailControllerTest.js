@@ -76,7 +76,7 @@ describe('DetailController', function() {
 		assert.strictEqual(ctrl.state, ctrl.states.input);
 		assert.strictEqual(view.visible, true);
 		assert.notStrictEqual(view.value, null);
-		assert.strictEqual(view.values.keys().count(), 2); // Only datalist is read and the new object
+		assert.strictEqual(view.values.keys().count(), 3);
 		collect([TestProxy.name, DataListProxy.name]).each(name => {
 			assert.strictEqual(view.values.has(name), true); // Objects read TestProxy, DataListProxy and RelatedProxy
 		});
