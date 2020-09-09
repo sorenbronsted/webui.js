@@ -5,16 +5,16 @@ const TestView = require('./utils/TestView').TestView;
 
 describe('View', function() {
 
-	let view;
+	let browser;
 	let doc;
 
 	beforeEach(function() {
-		let browser = new TestBrowser();
-		view = new TestView(browser.window,`<div id="defaultView"></div><div id="otherView" hidden></div>`);
+		browser = new TestBrowser();
 		doc = browser.window.document;
 	});
 
 	it('Should show and hide otherView', function() {
+		let view = new TestView(browser.window,`<div id="defaultView"></div><div id="otherView" hidden></div>`);
 		view.show();
 
 		// Check default

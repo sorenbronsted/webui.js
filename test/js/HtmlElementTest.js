@@ -13,7 +13,7 @@ class MyClass extends mvc.BaseProxy {
 	}
 }
 
-describe('Span', function() {
+describe('HtmlElement', function() {
 
 	let object;
 	let view;
