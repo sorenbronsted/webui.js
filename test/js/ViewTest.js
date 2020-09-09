@@ -17,6 +17,7 @@ describe('View', function() {
 		let view = new TestView(browser.window,`<div id="defaultView"></div><div id="otherView" hidden></div>`);
 		view.show();
 
+		assert.strictEqual(true, view.isVisible);
 		// Check default
 		let elem = doc.getElementById('defaultView');
 		assert.strictEqual(elem.hidden, false);
