@@ -14,9 +14,9 @@ describe('Anchor', function() {
 	beforeEach(function() {
 		browser = new TestBrowser();
 		view = new TestView(browser.window,
-			`<div data-class="BaseProxy"><a data-property="name" data-uid="1" data-type="menu"></a></div>`);
+			`<div data-class="BaseProxy"><a data-property="name"></a></div>`);
 		object = new mvc.BaseProxy();
-		object.add(JSON.parse('{"class":"BaseProxy","uid":1,"name":"load","selected":"true","visible":"true"}'));
+		object.add(JSON.parse('{"class":"BaseProxy","uid":1,"name":"load"}'));
 		view.show();
 		view.populate(mvc.BaseProxy.name, object.get(1));
 	});
@@ -26,7 +26,6 @@ describe('Anchor', function() {
 		assert.strictEqual(view.isValid, true);
 		let elem = browser.window.document.querySelector("a");
 		assert.notStrictEqual(elem, null);
-		assert.strictEqual(elem.style.active, 'selected');
 		assert.strictEqual(elem.href, `${browser.location}load`);
 	});
 
