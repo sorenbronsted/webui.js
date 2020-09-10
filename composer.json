@@ -13,24 +13,10 @@
     "secure-http": false
   },
 
-  "autoload": {
-    "psr-4": {
-      "sbronsted\\": [
-        "application/model"
-      ]
-    }
-  },
-
-  "require": {
-    "php": ">=7.1",
-    "ruckusing/ruckusing-migrations" : "^1.1",
-    "sbronsted/libdatabase": "^2.1",
-    "sbronsted/librest": "^4.1"
-  },
-
   "autoload-dev": {
     "psr-4": {
       "sbronsted\\": [
+        "application/model",
         "test/utils",
         "test/webdriver"
       ]
@@ -38,6 +24,10 @@
   },
 
   "require-dev": {
+    "php": ">=7.2",
+    "ruckusing/ruckusing-migrations" : "^1.1",
+    "sbronsted/libdatabase": "^2.1",
+    "sbronsted/librest": "^4.1",
     "phpunit/phpunit": "^8.5",
     "php-webdriver/webdriver": "^1.7"
   }

@@ -2,13 +2,13 @@
 
 SHELL=/bin/bash
 
-all:	install coverage
+all:	install coverage testui
 
 test:
 	npm test
 
-testui:
-	bin/composer.phar run testui
+testui: bundle
+	bin/testui.sh
 
 testapp:
 	bin/composer.phar run test

@@ -4,300 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "993ccbaa5fe1dc2d75c32c79ed61f349",
-    "packages": [
-        {
-            "name": "ruckusing/ruckusing-migrations",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ruckus/ruckusing-migrations.git",
-                "reference": "57d6ef2ea89d0c07a38b4697e406734ed7313025"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ruckus/ruckusing-migrations/zipball/57d6ef2ea89d0c07a38b4697e406734ed7313025",
-                "reference": "57d6ef2ea89d0c07a38b4697e406734ed7313025",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "bin": [
-                "ruckus.php"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Ruckusing": "lib/",
-                    "Task": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cody Caughlan",
-                    "email": "codycaughlan@gmail.com",
-                    "homepage": "https://github.com/ruckus/ruckusing-migrations/wiki",
-                    "role": "Project lead / Developer"
-                }
-            ],
-            "description": "Framework for generating and managing database migrations",
-            "homepage": "https://github.com/ruckus/ruckusing-migrations",
-            "keywords": [
-                "database",
-                "migrations",
-                "mysql",
-                "postgres",
-                "rake",
-                "ruckusing",
-                "task"
-            ],
-            "time": "2016-05-21T02:31:20+00:00"
-        },
-        {
-            "name": "sbronsted/libcommon",
-            "version": "v3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sorenbronsted/libcommon.git",
-                "reference": "856e165e659825eb837e6bb0766391ff4553cf1b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sorenbronsted/libcommon/zipball/856e165e659825eb837e6bb0766391ff4553cf1b",
-                "reference": "856e165e659825eb837e6bb0766391ff4553cf1b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "sbronsted\\": [
-                        "common/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Søren Brønsted",
-                    "email": "soren@bronsted.dk",
-                    "homepage": "https://bronsted.dk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Shared classes",
-            "homepage": "https://github.com/sorenbronsted/libcommon",
-            "time": "2020-07-16T08:15:08+00:00"
-        },
-        {
-            "name": "sbronsted/libdatabase",
-            "version": "v2.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sorenbronsted/libdatabase.git",
-                "reference": "9d42c2a080f1dc6d1bf31b9cca9841970416a5dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sorenbronsted/libdatabase/zipball/9d42c2a080f1dc6d1bf31b9cca9841970416a5dd",
-                "reference": "9d42c2a080f1dc6d1bf31b9cca9841970416a5dd",
-                "shasum": ""
-            },
-            "require": {
-                "ext-pdo": "*",
-                "php": ">=7.1",
-                "sbronsted/libcommon": "^3.0",
-                "sbronsted/libtypes": "^2.0",
-                "sbronsted/libutil": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5",
-                "ruckusing/ruckusing-migrations": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "sbronsted\\": "dbobject/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Søren Brønsted",
-                    "email": "soren@bronsted.dk",
-                    "homepage": "https://bronsted.dk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "General ORM mapper based on PDO",
-            "homepage": "https://github.com/sorenbronsted/libdatabase",
-            "time": "2020-08-25T08:59:07+00:00"
-        },
-        {
-            "name": "sbronsted/librest",
-            "version": "v4.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sorenbronsted/librest.git",
-                "reference": "83a4b1760b4a58f2e9048dc225c4e19730d6b83a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sorenbronsted/librest/zipball/83a4b1760b4a58f2e9048dc225c4e19730d6b83a",
-                "reference": "83a4b1760b4a58f2e9048dc225c4e19730d6b83a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.1",
-                "sbronsted/libcommon": "^3.1",
-                "sbronsted/libutil": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5",
-                "ruckusing/ruckusing-migrations": "^1.0",
-                "sbronsted/libdatabase": "^2.0",
-                "sbronsted/libtypes": "^2.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "sbronsted\\": [
-                        "rest/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Søren Brønsted",
-                    "email": "soren@bronsted.dk",
-                    "homepage": "https://bronsted.dk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A resource based rest api",
-            "homepage": "https://github.com/sorenbronsted/librest",
-            "time": "2020-01-23T09:27:47+00:00"
-        },
-        {
-            "name": "sbronsted/libtypes",
-            "version": "v2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sorenbronsted/libtypes.git",
-                "reference": "9c5395dd2c23394c4a82aa1a6d1eed5bd741baab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sorenbronsted/libtypes/zipball/9c5395dd2c23394c4a82aa1a6d1eed5bd741baab",
-                "reference": "9c5395dd2c23394c4a82aa1a6d1eed5bd741baab",
-                "shasum": ""
-            },
-            "require": {
-                "ext-simplexml": "*",
-                "php": ">=7.0",
-                "sbronsted/libcommon": "^3.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "sbronsted\\": [
-                        "types/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Søren Brønsted",
-                    "email": "soren@bronsted.dk",
-                    "homepage": "https://bronsted.dk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Types used by libdatabase",
-            "homepage": "https://github.com/sorenbronsted/libcommon",
-            "time": "2020-01-20T15:49:13+00:00"
-        },
-        {
-            "name": "sbronsted/libutil",
-            "version": "v2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sorenbronsted/libutil.git",
-                "reference": "2a5738e17933518e641a91bbe1d44386af02aeaf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sorenbronsted/libutil/zipball/2a5738e17933518e641a91bbe1d44386af02aeaf",
-                "reference": "2a5738e17933518e641a91bbe1d44386af02aeaf",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "sbronsted/libcommon": "^3.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "sbronsted\\": [
-                        "config/",
-                        "di/",
-                        "log/",
-                        "lpr/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Søren Brønsted",
-                    "email": "soren@bronsted.dk",
-                    "homepage": "https://bronsted.dk",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Handy utilities",
-            "homepage": "https://github.com/sorenbronsted/libutil",
-            "time": "2020-01-20T16:15:28+00:00"
-        }
-    ],
+    "content-hash": "d693b7df7b29da771004d47f0240a6f9",
+    "packages": [],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -1116,6 +824,297 @@
             "time": "2020-06-22T07:06:58+00:00"
         },
         {
+            "name": "ruckusing/ruckusing-migrations",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ruckus/ruckusing-migrations.git",
+                "reference": "57d6ef2ea89d0c07a38b4697e406734ed7313025"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ruckus/ruckusing-migrations/zipball/57d6ef2ea89d0c07a38b4697e406734ed7313025",
+                "reference": "57d6ef2ea89d0c07a38b4697e406734ed7313025",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "bin": [
+                "ruckus.php"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Ruckusing": "lib/",
+                    "Task": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cody Caughlan",
+                    "email": "codycaughlan@gmail.com",
+                    "homepage": "https://github.com/ruckus/ruckusing-migrations/wiki",
+                    "role": "Project lead / Developer"
+                }
+            ],
+            "description": "Framework for generating and managing database migrations",
+            "homepage": "https://github.com/ruckus/ruckusing-migrations",
+            "keywords": [
+                "database",
+                "migrations",
+                "mysql",
+                "postgres",
+                "rake",
+                "ruckusing",
+                "task"
+            ],
+            "time": "2016-05-21T02:31:20+00:00"
+        },
+        {
+            "name": "sbronsted/libcommon",
+            "version": "v3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sorenbronsted/libcommon.git",
+                "reference": "856e165e659825eb837e6bb0766391ff4553cf1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sorenbronsted/libcommon/zipball/856e165e659825eb837e6bb0766391ff4553cf1b",
+                "reference": "856e165e659825eb837e6bb0766391ff4553cf1b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "sbronsted\\": [
+                        "common/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Søren Brønsted",
+                    "email": "soren@bronsted.dk",
+                    "homepage": "https://bronsted.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Shared classes",
+            "homepage": "https://github.com/sorenbronsted/libcommon",
+            "time": "2020-07-16T08:15:08+00:00"
+        },
+        {
+            "name": "sbronsted/libdatabase",
+            "version": "v2.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sorenbronsted/libdatabase.git",
+                "reference": "46f92308f8d0c2ec6f14d42aed76eb26be222692"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sorenbronsted/libdatabase/zipball/46f92308f8d0c2ec6f14d42aed76eb26be222692",
+                "reference": "46f92308f8d0c2ec6f14d42aed76eb26be222692",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": ">=7.1",
+                "sbronsted/libcommon": "^3.0",
+                "sbronsted/libtypes": "^2.0",
+                "sbronsted/libutil": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5",
+                "ruckusing/ruckusing-migrations": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "sbronsted\\": "dbobject/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Søren Brønsted",
+                    "email": "soren@bronsted.dk",
+                    "homepage": "https://bronsted.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "General ORM mapper based on PDO",
+            "homepage": "https://github.com/sorenbronsted/libdatabase",
+            "time": "2020-08-28T08:11:20+00:00"
+        },
+        {
+            "name": "sbronsted/librest",
+            "version": "v4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sorenbronsted/librest.git",
+                "reference": "83a4b1760b4a58f2e9048dc225c4e19730d6b83a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sorenbronsted/librest/zipball/83a4b1760b4a58f2e9048dc225c4e19730d6b83a",
+                "reference": "83a4b1760b4a58f2e9048dc225c4e19730d6b83a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1",
+                "sbronsted/libcommon": "^3.1",
+                "sbronsted/libutil": "^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5",
+                "ruckusing/ruckusing-migrations": "^1.0",
+                "sbronsted/libdatabase": "^2.0",
+                "sbronsted/libtypes": "^2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "sbronsted\\": [
+                        "rest/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Søren Brønsted",
+                    "email": "soren@bronsted.dk",
+                    "homepage": "https://bronsted.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A resource based rest api",
+            "homepage": "https://github.com/sorenbronsted/librest",
+            "time": "2020-01-23T09:27:47+00:00"
+        },
+        {
+            "name": "sbronsted/libtypes",
+            "version": "v2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sorenbronsted/libtypes.git",
+                "reference": "9c5395dd2c23394c4a82aa1a6d1eed5bd741baab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sorenbronsted/libtypes/zipball/9c5395dd2c23394c4a82aa1a6d1eed5bd741baab",
+                "reference": "9c5395dd2c23394c4a82aa1a6d1eed5bd741baab",
+                "shasum": ""
+            },
+            "require": {
+                "ext-simplexml": "*",
+                "php": ">=7.0",
+                "sbronsted/libcommon": "^3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "sbronsted\\": [
+                        "types/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Søren Brønsted",
+                    "email": "soren@bronsted.dk",
+                    "homepage": "https://bronsted.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Types used by libdatabase",
+            "homepage": "https://github.com/sorenbronsted/libcommon",
+            "time": "2020-01-20T15:49:13+00:00"
+        },
+        {
+            "name": "sbronsted/libutil",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sorenbronsted/libutil.git",
+                "reference": "2a5738e17933518e641a91bbe1d44386af02aeaf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sorenbronsted/libutil/zipball/2a5738e17933518e641a91bbe1d44386af02aeaf",
+                "reference": "2a5738e17933518e641a91bbe1d44386af02aeaf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "sbronsted/libcommon": "^3.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "sbronsted\\": [
+                        "config/",
+                        "di/",
+                        "log/",
+                        "lpr/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Søren Brønsted",
+                    "email": "soren@bronsted.dk",
+                    "homepage": "https://bronsted.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Handy utilities",
+            "homepage": "https://github.com/sorenbronsted/libutil",
+            "time": "2020-01-20T16:15:28+00:00"
+        },
+        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "1.0.1",
             "source": {
@@ -1923,7 +1922,7 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.1.3",
+            "version": "v5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -2066,8 +2065,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": ">=7.1"
-    },
-    "platform-dev": []
+    "platform": [],
+    "platform-dev": {
+        "php": ">=7.2"
+    }
 }
